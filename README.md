@@ -94,4 +94,4 @@ MIT - See [LICENSE](LICENSE) file
 
 ---
 
-*Published November 2024. Open source implementation of persistent learning architecture.*
+*Published November 2025. Open source implementation of persistent learning architecture.*
