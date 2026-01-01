@@ -45,6 +45,11 @@ Watch three agents face the same task stream:
 
 Save → Refresh → Load to prove persistence.
 
+Important:
+This SDK enables persistent state and bounded self-update.
+It does not certify identity stability, autonomy readiness, or safety.
+Those require external auditing and governance layers not included here.
+
 ## Python SDK
 ```python
 from permamind import PermaMindAgent
