@@ -25,34 +25,6 @@ This demo exists to illustrate architecture and behavior, not deployment.
 
 PermaMind explores how AI systems can maintain durable internal state, allowing behavior to evolve meaningfully across sessions while remaining bounded and observable.
 
----
-
-## Demo Mode – Isolated Sandbox
-
-This project is presented as a sandboxed demonstration environment.
-
-* Runs without API keys or credentials
-* Does not connect to external systems
-* Learning state is local and fully reversible
-* No production data is accessed or modified
-
-This demo exists to illustrate architecture and behavior, not deployment.
-
----
-
-## What This Is
-
-* A reference implementation of persistent learning behavior
-* A controlled environment for observing state evolution
-* A framework for reasoning about memory, learning, and constraints
-
-## What This Is Not
-
-* A production system
-* An autonomous agent acting on external systems
-* A drop-in replacement for existing AI stacks
-
----
 
 ## The Problem
 
