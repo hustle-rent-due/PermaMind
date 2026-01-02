@@ -2,61 +2,109 @@
 
 **Persistent Identity & Stateful Decision Architecture for AI Agents**
 
-[![Demo](https://img.shields.io/badge/demo-live-green)](https://bapxai.com/pssu.html)
-[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+PermaMind explores how AI systems can maintain durable internal state, allowing behavior to evolve meaningfully across sessions while remaining bounded and observable.
+
+---
+
+## Demo Mode – Isolated Sandbox
+
+This project is presented as a sandboxed demonstration environment.
+
+* Runs without API keys or credentials
+* Does not connect to external systems
+* Learning state is local and fully reversible
+* No production data is accessed or modified
+
+This demo exists to illustrate architecture and behavior, not deployment.
+
+---
+
+## What This Is
+
+* A reference implementation of persistent learning behavior
+* A controlled environment for observing state evolution
+* A framework for reasoning about memory, learning, and constraints
+
+## What This Is Not
+
+* A production system
+* An autonomous agent acting on external systems
+* A drop-in replacement for existing AI stacks
+
+---
 
 ## The Problem
 
-Most AI agents don't actually learn across sessions. Even with "memory" enabled:
-- Internal state resets between runs
-- Same mistakes repeat
-- Preferences don't stabilize
-- Performance can't compound
+Most AI agents do not truly learn across sessions. Even with "memory" enabled:
+
+* Internal state resets between runs
+* Mistakes repeat
+* Preferences fail to stabilize
+* Performance cannot compound
 
 **Memory exists. Reasoning exists. Durable behavioral change does not.**
 
+---
+
 ## The Solution
 
-PermaMind implements PSSU (Persistent Stateful Self-Update):
-- **Persistence**: Identity survives sessions
-- **Statefulness**: Internal variables shape decisions  
-- **Self-Update**: Experience modifies structure
-- **Bounded Retention**: Only high-signal changes persist
+PermaMind implements **PSSU (Persistent Stateful Self-Update)**:
+
+* **Persistence** — identity survives across sessions
+* **Statefulness** — internal variables shape decisions
+* **Self-Update** — experience modifies internal structure
+* **Bounded Retention** — only high-signal changes persist
+
+---
 
 ## Architecture
 
-### Gap Engine™
-Detects prediction errors (Δ) and computes priority: Q = k·Δ
+**Gap Engine™**  
+Detects prediction errors (Δ) and computes priority: `Q = k · Δ`
 
-### Confidence Gate™
+**Confidence Gate™**  
 Blocks confident assertions when unresolved gaps exist
 
-### Identity Store™
+**Identity Store™**  
 Persists learned constraints across sessions
+
+---
 
 ## Live Demo
 
 👉 **[Try the interactive demo](https://bapxai.com/pssu.html)**
 
 Watch three agents face the same task stream:
-- **Frozen**: High coherence, no adaptation
-- **Dissolved**: High plasticity, unstable
-- **Bounded**: Controlled evolution within limits
 
-Save → Refresh → Load to prove persistence.
+* **Frozen** — high coherence, no adaptation
+* **Dissolved** — high plasticity, unstable
+* **Bounded** — controlled evolution within limits
 
-Important:
+**Save → Refresh → Load** to prove persistence.
+
+---
+
+## Important
+
 This SDK enables persistent state and bounded self-update.
-It does not certify identity stability, autonomy readiness, or safety.
-Those require external auditing and governance layers not included here.
 
-## Python SDK
+**It does not certify:**
+
+* Identity stability
+* Autonomy readiness
+* Production safety
+
+These require external auditing and governance layers, which are intentionally out of scope.
+
+---
+
+## Python SDK (Example)
+
 ```python
 from permamind import PermaMindAgent
 
 agent = PermaMindAgent("my_agent.json")
 
-# Make decision
 choice = agent.decide(
     context="Lead conversion dropped",
     options=[
@@ -65,7 +113,6 @@ choice = agent.decide(
     ]
 )
 
-# Log outcome  
 agent.gap_engine.record(
     context="Lead conversion dropped",
     prediction=0.6,
@@ -74,18 +121,25 @@ agent.gap_engine.record(
 )
 ```
 
+---
+
 ## Installation
+
 ```bash
 git clone https://github.com/hustle-rent-due/PermaMind.git
 cd PermaMind
-# No dependencies needed - uses only Python standard library
+# No dependencies required — Python standard library only
 ```
+
+---
 
 ## Further Reading
 
-- [Gap Framework Whitepaper](https://omegaaxiommeta.substack.com/p/the-gap-framework-pssu-manual)
-- [PermaMind Engine Technical Paper](https://omegaaxiommeta.substack.com/p/permamind-engine-white-paper)
-- [Live Demo](https://bapxai.com/pssu.html)
+* [Gap Framework Whitepaper](https://omegaaxiommeta.substack.com/p/the-gap-framework-pssu-manual)
+* [PermaMind Engine Technical Paper](https://omegaaxiommeta.substack.com/p/permamind-engine)
+* [Live Demo](https://bapxai.com/pssu.html)
+
+---
 
 ## Contact
 
@@ -93,10 +147,14 @@ cd PermaMind
 📧 nile@bapxai.com  
 🌐 https://bapxai.com
 
+---
+
 ## License
 
-MIT - See [LICENSE](LICENSE) file
+MIT — see [LICENSE](LICENSE) file
 
 ---
 
-*Published November 2025. Open source implementation of persistent learning architecture.*
+**Future work may explore integrations only after safety, observability, and control boundaries are explicit.**
+
+Published November 2025. Open-source reference implementation of persistent learning architecture.
