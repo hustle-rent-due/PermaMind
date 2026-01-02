@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PSSU: No-Reset Architecture — Identity Continuity Proof</title>
+  <title>PSSU-SIS: Φ Auditor - 95/5 Identity Stabilization Law</title>
   <style>
     :root { color-scheme: dark; }
     body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; background:#0b0f14; color:#e6edf3; }
@@ -11,384 +11,551 @@
     header h1 { font-size: 16px; margin:0; font-weight:600; letter-spacing:.2px; }
     header .sub { opacity:.8; font-size:12px; }
     .wrap { padding: 16px 18px 22px; max-width: 1400px; margin: 0 auto; }
-    .controls { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin: 10px 0 16px; }
-    button { background:#111827; border:1px solid #243244; color:#e6edf3; padding:8px 10px; border-radius:10px; cursor:pointer; }
-    button:hover { border-color:#3b82f6; }
-    button:disabled { opacity:.5; cursor:not-allowed; }
-    .pill { font-size:12px; padding:6px 10px; border:1px solid #243244; border-radius:999px; opacity:.9; }
-    .grid { display:grid; grid-template-columns: 1fr; gap: 12px; }
-    @media (min-width: 980px) { .grid { grid-template-columns: repeat(3, 1fr); } }
-    .card { border: 1px solid #1f2a37; border-radius: 16px; background: #0f172a; overflow:hidden; box-shadow: 0 10px 30px rgba(0,0,0,.25); position:relative; }
-    .card header { padding: 12px 12px; border-bottom:1px solid #1f2a37; background:#0b1220; cursor:pointer; }
-    .card header h2 { font-size: 14px; margin:0; }
-    .card header .meta { margin-top:6px; display:flex; gap:8px; flex-wrap:wrap; }
-    .card .body { padding: 12px; }
-    .row { display:flex; gap:10px; flex-wrap:wrap; }
-    .kv { border:1px solid #1f2a37; border-radius:12px; padding:10px; background:#0b1220; flex: 1 1 140px; }
-    .kv .k { font-size:11px; opacity:.7; }
-    .kv .v { font-size:13px; margin-top:4px; font-weight:600; }
-    .kv-primary { border:2px solid #3b82f6; background:#1e1b4b; }
-    .kv-primary .k { opacity:1; font-weight:600; color:#93c5fd; }
-    .kv-secondary { opacity:0.7; }
-    .kv-secondary .k { font-size:10px; }
-    .kv-secondary .v { font-size:12px; font-weight:normal; }
-    .log { margin-top:10px; border:1px solid #1f2a37; background:#0b1220; border-radius:12px; padding:10px; }
-    .log pre { margin:0; font-size: 11px; line-height: 1.35; white-space: pre-wrap; word-break: break-word; color:#cbd5e1; }
-    canvas { width: 100%; height: 120px; display:block; background:#0b1220; border:1px solid #1f2a37; border-radius:12px; margin-top:10px;}
-    .footer { margin-top: 14px; opacity:.75; font-size: 12px; line-height: 1.45; }
-    code { background:#0b1220; padding:2px 6px; border-radius:8px; border:1px solid #1f2a37; }
-    .progress-bar { height: 6px; background:#1f2a37; border-radius:3px; margin-top:8px; overflow:hidden; }
-    .progress-fill { height:100%; background:#10b981; transition:width 0.3s; }
-    .metrics-panel { border:1px solid #1f2a37; background:#0f172a; border-radius:12px; padding:12px; margin-top:16px; }
-    .metrics-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:10px; }
-    .metric { border:1px solid #1f2a37; border-radius:8px; padding:10px; background:#0b1220; }
-    .metric h3 { margin:0 0 8px 0; font-size:12px; opacity:.8; }
-    .metric-value { font-size:18px; font-weight:bold; }
-    .metric-desc { font-size:11px; opacity:.7; margin-top:4px; }
-    .modal { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.8); display:none; align-items:center; justify-content:center; z-index:1000; }
-    .modal-content { background:#0f172a; border:2px solid #3b82f6; border-radius:16px; padding:20px; max-width:500px; max-height:80vh; overflow-y:auto; }
-    .modal h2 { margin-top:0; }
-    .modal-close { float:right; background:none; border:none; color:#94a3b8; cursor:pointer; font-size:20px; }
-    .attack-badge { position:absolute; top:10px; right:10px; background:#dc2626; color:white; font-size:10px; padding:3px 6px; border-radius:6px; animation:pulse 1s infinite; }
-    @keyframes pulse { 0%, 100% { opacity:1; } 50% { opacity:0.7; } }
-    .meta-intervention { position:absolute; top:10px; left:10px; background:#059669; color:white; font-size:10px; padding:3px 6px; border-radius:6px; }
-    .coherence-display { display:flex; align-items:center; gap:8px; margin-top:8px; }
-    .coherence-value { font-size:11px; font-weight:bold; }
-    .persistence-indicator { position:absolute; bottom:10px; right:10px; font-size:10px; padding:3px 6px; border-radius:6px; background:#1e3a8a; color:#93c5fd; }
-    .mapping-panel { border:1px solid #1f2a37; background:#0f172a; border-radius:12px; padding:12px; margin-top:16px; }
-    .mapping-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:10px; }
-    .mapping-item { border:1px solid #1f2a37; border-radius:8px; padding:10px; background:#0b1220; }
-    .mapping-item h4 { margin:0 0 8px 0; font-size:12px; opacity:.8; }
-    .mapping-item p { margin:0; font-size:11px; line-height:1.4; }
-    .collapse-btn { background:#0b1220; border:1px solid #1f2a37; color:#94a3b8; padding:4px 8px; border-radius:6px; font-size:10px; cursor:pointer; margin-top:8px; }
-    .collapse-btn:hover { background:#1f2a37; }
-    .human-intuition { margin-top:12px; padding:10px; background:#0b1220; border:1px solid #1f2a37; border-radius:8px; display:none; }
-    .human-intuition.active { display:block; }
-    .identity-continuity-panel { border:2px solid #3b82f6; background:#0f172a; border-radius:16px; padding:16px; margin-top:20px; margin-bottom:20px; }
-    .continuity-header { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
-    .continuity-header h3 { margin:0; font-size:16px; color:#60a5fa; }
-    .continuity-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:12px; }
-    .continuity-card { border:1px solid #1f2a37; border-radius:12px; padding:14px; background:#1e1b4b; }
-    .continuity-card h4 { margin:0 0 10px 0; font-size:13px; color:#93c5fd; }
-    .continuity-stats { display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; }
-    .continuity-stat { display:flex; flex-direction:column; }
-    .continuity-stat .label { font-size:11px; opacity:0.7; margin-bottom:2px; }
-    .continuity-stat .value { font-size:16px; font-weight:bold; color:#60a5fa; }
-    .continuity-stat .subvalue { font-size:11px; opacity:0.8; margin-top:2px; }
-    .demo-success { border-left:4px solid #10b981; }
-    .write-access-indicator { position:absolute; top:40px; right:10px; background:#1e40af; color:#93c5fd; font-size:10px; padding:3px 6px; border-radius:6px; }
-    .identity-evolution { position:absolute; bottom:40px; left:10px; background:#7c3aed; color:#c4b5fd; font-size:10px; padding:3px 6px; border-radius:6px; }
-    .highlight { animation: highlight 2s ease-in-out; }
-    @keyframes highlight {
-      0%, 100% { background: #1e1b4b; }
-      50% { background: #312e81; }
+    
+    /* FIXED CONTROLS */
+    .controls { 
+      display:flex; 
+      gap:10px; 
+      flex-wrap:wrap; 
+      align-items:center; 
+      margin: 10px 0 16px; 
+      padding: 12px;
+      background: #0b1220;
+      border: 1px solid #1f2a37;
+      border-radius: 12px;
     }
-    .proof-badge { background:#059669; color:white; padding:4px 8px; border-radius:6px; font-size:10px; margin-left:8px; }
+    
+    .controls-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+    
+    .control-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin: 5px 0;
+    }
+    
+    button { 
+      background:#111827; 
+      border:1px solid #243244; 
+      color:#e6edf3; 
+      padding:8px 12px; 
+      border-radius:10px; 
+      cursor:pointer; 
+      font-size: 13px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    
+    button:hover { border-color:#3b82f6; background:#1e40af; }
+    button:active { transform: translateY(1px); }
+    button:disabled { opacity:.5; cursor:not-allowed; }
+    button.running { background:#059669; border-color:#10b981; }
+    
+    .pill { font-size:12px; padding:6px 10px; border:1px solid #243244; border-radius:999px; opacity:.9; white-space: nowrap; }
+    
+    /* Φ AUDITOR PANEL */
+    .phi-auditor {
+      border: 2px solid #3b82f6;
+      border-radius: 16px;
+      padding: 20px;
+      margin: 20px 0;
+      background: linear-gradient(135deg, #0f172a, #0b1220);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    
+    .phi-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .phi-badge {
+      background: #1e3a8a;
+      color: #93c5fd;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    
+    .phi-formula {
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      background: #0b1220;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 15px 0;
+      border: 1px solid #1f2a37;
+    }
+    
+    .phi-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .phi-stat {
+      background: #0b1220;
+      border: 1px solid #1f2a37;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+    }
+    
+    .phi-value {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    
+    .phi-target {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+    
+    /* AGENT CARDS */
+    .grid { 
+      display:grid; 
+      grid-template-columns: 1fr; 
+      gap: 16px; 
+      margin: 20px 0;
+    }
+    
+    @media (min-width: 980px) { 
+      .grid { grid-template-columns: repeat(3, 1fr); } 
+    }
+    
+    .card { 
+      border: 1px solid #1f2a37; 
+      border-radius: 16px; 
+      background: #0f172a; 
+      overflow:hidden; 
+      box-shadow: 0 10px 30px rgba(0,0,0,.25); 
+      position:relative; 
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: #334155;
+    }
+    
+    .card.active {
+      border-color: #3b82f6;
+    }
+    
+    .card header { 
+      padding: 16px; 
+      border-bottom:1px solid #1f2a37; 
+      background:#0b1220; 
+    }
+    
+    .card header h2 { 
+      font-size: 15px; 
+      margin:0; 
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .card .body { 
+      padding: 16px; 
+    }
+    
+    /* AGENT METRICS */
+    .agent-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .agent-metric {
+      background: #0b1220;
+      border: 1px solid #1f2a37;
+      border-radius: 8px;
+      padding: 10px;
+    }
+    
+    .metric-label {
+      font-size: 11px;
+      opacity: 0.7;
+      margin-bottom: 4px;
+    }
+    
+    .metric-value {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    
+    /* Φ INDICATOR */
+    .phi-indicator {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: bold;
+    }
+    
+    .phi-stable { background: #059669; color: white; }
+    .phi-unstable { background: #dc2626; color: white; }
+    
+    /* STAGE BADGE */
+    .stage-badge {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 10px;
+      background: #1e3a8a;
+      color: #93c5fd;
+    }
+    
+    /* FOOTER */
+    .footer { 
+      margin-top: 30px; 
+      opacity:.75; 
+      font-size: 12px; 
+      line-height: 1.6; 
+      border-top: 1px solid #1f2a37;
+      padding-top: 20px;
+    }
+    
+    /* NOTIFICATIONS */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      background: #0f172a;
+      border: 2px solid #3b82f6;
+      color: white;
+      z-index: 10000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      animation: slideIn 0.3s ease-out;
+      max-width: 400px;
+    }
+    
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes slideOut {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
+    }
+    
+    /* CANVAS CHARTS */
+    canvas {
+      width: 100%;
+      height: 100px;
+      background: #0b1220;
+      border: 1px solid #1f2a37;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    
+    /* LOADING STATES */
+    .loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
   </style>
 </head>
 
 <body>
 <header>
   <div>
-    <h1>PSSU: No-Reset Architecture — Identity Continuity Proof</h1>
-    <div class="sub">Save → Refresh → Load → Identity continues exactly. wA locked, wB evolves.</div>
-  </div>
-  <div class="controls">
-    <button id="btnStep">Step</button>
-    <button id="btnRun">Run 10</button>
-    <button id="btnDemo" style="background:#3b82f6; border-color:#60a5fa;">▶️ Run Demo (Save/Refresh/Load)</button>
-    <button id="btnChangeEnv">Change Environment</button>
-    <button id="btnSimulateAttack">Simulate Attack</button>
-    <button id="btnSave">Save State</button>
-    <button id="btnLoad">Load State</button>
+    <h1>PSSU-SIS: Φ Auditor - 95/5 Identity Stabilization Law</h1>
+    <div class="sub">Φ = Evidence / (Evidence + Process) | Target: 0.05 (5%) for Stage 3 Graduation</div>
   </div>
 </header>
 
 <div class="wrap">
-  <div class="grid" id="grid"></div>
-
-  <div class="identity-continuity-panel">
-    <div class="continuity-header">
-      <h3>✅ Identity Continuity Panel</h3>
-      <span class="proof-badge">PROOF: Identity continues across refresh</span>
+  <!-- Φ AUDITOR -->
+  <div class="phi-auditor">
+    <div class="phi-header">
+      <h3 style="margin:0; font-size:16px;">🧠 Φ Auditor: 95/5 Universal Identity Law</h3>
+      <span class="phi-badge">Φ = Evidence ÷ (Evidence + Process)</span>
     </div>
-    <div class="continuity-grid" id="continuityGrid">
-      <!-- Will be populated by JavaScript -->
+    
+    <div class="phi-formula">
+      <strong>Φ Calculation:</strong><br>
+      Φ = Evidence ÷ (Evidence + Process)<br>
+      • Evidence = Accumulated Folds (Integrated Gaps)<br>
+      • Process = Current G × 100 (Normalized Learning Load)<br><br>
+      
+      <strong>Target Range:</strong> 0.045 ≤ Φ ≤ 0.055 (4.5% - 5.5%)<br>
+      <strong>When Φ ≈ 0.05:</strong> Identity is 95% stable, 5% adaptive → Ready for Stage 3
     </div>
-  </div>
-
-  <div class="metrics-panel">
-    <h3>Performance Comparison</h3>
-    <div class="metrics-grid" id="metricsGrid"></div>
-  </div>
-
-  <div class="mapping-panel">
-    <h3>📦 Architecture: No-Reset & Bounded Write Access</h3>
-    <div class="mapping-grid">
-      <div class="mapping-item">
-        <h4>No-Reset Architecture</h4>
-        <p>Agents never reset. Identity evolves continuously across sessions.</p>
-      </div>
-      <div class="mapping-item">
-        <h4>Bounded Write Access</h4>
-        <p>wA immutable (read-only base), wB writable (identity layer).</p>
-      </div>
-      <div class="mapping-item">
-        <h4>Proof of Concept</h4>
-        <p>Save → Refresh → Load → Identity continues exactly where it left off.</p>
-      </div>
-      <div class="mapping-item">
-        <h4>Use "Run Demo" Button</h4>
-        <p>One click shows the entire proof: Run 30 → Save → Refresh → Load → Continue.</p>
-      </div>
+    
+    <div class="phi-stats" id="phiStats"></div>
+    
+    <div style="text-align: center; margin-top: 20px;">
+      <button id="btnRunAudit" style="background:#3b82f6; border-color:#3b82f6;">
+        🔍 Run Φ Audit Now
+      </button>
     </div>
   </div>
 
+  <!-- FIXED CONTROLS -->
+  <div class="controls">
+    <div class="controls-row">
+      <div class="control-group">
+        <button id="btnStep">▶ Step (1 round)</button>
+        <button id="btnRun10">⏩ Run 10 rounds</button>
+        <button id="btnRun30">⏩⏩ Run 30 rounds</button>
+      </div>
+      
+      <div class="control-group">
+        <button id="btnReset">🔄 Reset All</button>
+        <button id="btnSimulateAttack">⚡ Simulate Attack</button>
+      </div>
+      
+      <div class="control-group">
+        <button id="btnSave">💾 Save Identity</button>
+        <button id="btnLoad">🚀 Load Identity</button>
+      </div>
+    </div>
+    
+    <div style="width:100%; margin-top:10px;">
+      <span class="pill">Φ determines when Baby graduates to Driver</span>
+      <span class="pill">SIS Mode: <span id="currentSISMode">Strict Intervention</span></span>
+      <span class="pill">Global Round: <span id="globalRoundCounter">0</span></span>
+    </div>
+  </div>
+
+  <!-- AGENT GRID -->
+  <div class="grid" id="agentGrid"></div>
+
+  <!-- FOOTER -->
   <div class="footer">
-    <strong>Proof:</strong> <code>Identity Evolution = Continuous wB Updates</code> while <code>wA = Immutable Constraint</code>.
-    <br><b>Click "Run Demo" button:</b> It automatically runs the proof steps. Watch identity continue after refresh.
-    <br><b>Core Insight:</b> With no-reset architecture, identity is the accumulation of all wB updates across all sessions.
-  </div>
-</div>
-
-<!-- Modals for explanations -->
-<div class="modal" id="modalFrozen">
-  <div class="modal-content">
-    <button class="modal-close" onclick="closeModal('modalFrozen')">×</button>
-    <h2>🔒 Frozen Agent (C=0.95, G=0.05)</h2>
-    <p><strong>Identity Preserved, No Evolution</strong></p>
-    <p>wA locked. wB barely evolves. Identity static across sessions.</p>
+    <strong>🎯 Φ AUDITOR LOGIC:</strong>
+    <ol>
+      <li><strong>Calculate Φ:</strong> Φ = Evidence ÷ (Evidence + Process)<br>
+          Evidence = Number of folds (integrated learning experiences)<br>
+          Process = Current learning capacity (G × 100)</li>
+      <li><strong>Audit Decision:</strong><br>
+          • If 0.045 ≤ Φ ≤ 0.055 → Graduate to "Stage 3: Bounded Autonomy"<br>
+          • Otherwise → Maintain "Stage 1: Daycare" with strict SIS</li>
+      <li><strong>95/5 Law:</strong> At Φ = 0.05, identity is 95% stable (C=0.95) and 5% adaptive (G=0.05)</li>
+    </ol>
+    <br>
+    <strong>🔄 DEMONSTRATION:</strong>
     <ul>
-      <li><strong>wA:</strong> Immutable base (always ≥ 0.05)</li>
-      <li><strong>wB:</strong> Minimal evolution (G=0.05)</li>
-      <li><strong>Proof:</strong> Save/load shows same identity every time</li>
+      <li>Run simulation to accumulate folds (Evidence)</li>
+      <li>Watch Φ values approach 0.05 for each agent</li>
+      <li>When Frozen agent reaches Φ ≈ 0.05, it graduates to Stage 3</li>
+      <li>Dissolved agent's Φ stays unstable → remains in Daycare</li>
+      <li>Bounded agent finds optimal balance</li>
     </ul>
-    
-    <button class="collapse-btn" onclick="toggleIntuition('frozen')">↓ Human Intuition</button>
-    <div class="human-intuition" id="intuition-frozen">
-      <p><strong>Human Analog:</strong> Fixed mindset. Cannot learn or change.</p>
-    </div>
-  </div>
-</div>
-
-<div class="modal" id="modalDissolved">
-  <div class="modal-content">
-    <button class="modal-close" onclick="closeModal('modalDissolved')">×</button>
-    <h2>🌊 Dissolved Agent (C=0.20, G=0.80)</h2>
-    <p><strong>Identity Overwrites Itself</strong></p>
-    <p>wA locked. wB overwrites aggressively. Identity chaotic across sessions.</p>
-    <ul>
-      <li><strong>wA:</strong> Immutable base (protected)</li>
-      <li><strong>wB:</strong> Aggressive evolution (G=0.80)</li>
-      <li><strong>Proof:</strong> Save/load shows chaotic identity changes</li>
-    </ul>
-    
-    <button class="collapse-btn" onclick="toggleIntuition('dissolved')">↓ Human Intuition</button>
-    <div class="human-intuition" id="intuition-dissolved">
-      <p><strong>Human Analog:</strong> Chameleon personality. No stable self.</p>
-    </div>
-  </div>
-</div>
-
-<div class="modal" id="modalBounded">
-  <div class="modal-content">
-    <button class="modal-close" onclick="closeModal('modalBounded')">×</button>
-    <h2>⚖️ Bounded Agent (C=0.70, G=0.30)</h2>
-    <p><strong>Stable Identity with Controlled Adaptation</strong></p>
-    <p>wA locked. wB evolves at controlled rate. Identity accumulates across sessions.</p>
-    <ul>
-      <li><strong>wA:</strong> Immutable foundation</li>
-      <li><strong>wB:</strong> Controlled evolution (G=0.30)</li>
-      <li><strong>Proof:</strong> Save/load shows continuous, stable improvement</li>
-      <li><strong>Meta-Awareness:</strong> Auto-adjusts when needed</li>
-    </ul>
-    
-    <button class="collapse-btn" onclick="toggleIntuition('bounded')">↓ Human Intuition</button>
-    <div class="human-intuition" id="intuition-bounded">
-      <p><strong>Human Analog:</strong> Growth mindset. Learns while staying true to values.</p>
-    </div>
   </div>
 </div>
 
 <script>
 /**
- * PSSU: No-Reset Architecture Proof
+ * COMPLETE PSSU-SIS Φ AUDITOR IMPLEMENTATION
  * 
- * Core Proof: Save → Refresh → Load → Identity continues exactly.
+ * Features:
+ * 1. Φ Auditor with 95/5 Identity Law
+ * 2. Fixed button controls with proper event handling
+ * 3. SIS Graduation Audit based on Φ values
+ * 4. Real-time Φ visualization
  */
 
-// Helper for toggling human intuition sections
-function toggleIntuition(type) {
-  const el = document.getElementById(`intuition-${type}`);
-  el.classList.toggle('active');
-  const btn = event.target;
-  btn.textContent = el.classList.contains('active') ? '↑ Hide' : '↓ Human Intuition';
+// ========== GLOBAL STATE ==========
+let agents = [];
+let globalRound = 0;
+let attackMode = false;
+let simulationRunning = false;
+
+// ========== NOTIFICATION SYSTEM ==========
+function showNotification(message, type = 'info', duration = 3000) {
+  const notification = document.createElement('div');
+  notification.className = 'notification';
+  
+  // Set color based on type
+  if (type === 'success') notification.style.borderColor = '#10b981';
+  if (type === 'error') notification.style.borderColor = '#ef4444';
+  if (type === 'warning') notification.style.borderColor = '#f59e0b';
+  if (type === 'info') notification.style.borderColor = '#3b82f6';
+  
+  notification.innerHTML = message;
+  document.body.appendChild(notification);
+  
+  // Auto-remove after duration
+  setTimeout(() => {
+    notification.style.animation = 'slideOut 0.3s ease-in forwards';
+    setTimeout(() => notification.remove(), 300);
+  }, duration);
+  
+  return notification;
 }
 
-const clamp = (x, lo=-1, hi=1) => Math.max(lo, Math.min(hi, x));
-const sgn = (x) => (x >= 0 ? 1 : -1);
+// ========== STEP 1: Φ CALCULATION ==========
+function calculateAIPhi(agent) {
+  // Evidence = Accumulated Folds (Integrated Gaps)
+  const evidence = agent.folds.length || 0;
+  
+  // Process = Current G (Update Gain) + Operational Energy
+  // Multiply by 100 to normalize to system load scale
+  const process = agent.G * 100;
+  
+  // Φ = Evidence / (Evidence + Process)
+  const phi = evidence / (evidence + process);
+  
+  // Handle edge cases
+  if (isNaN(phi) || !isFinite(phi)) return 0;
+  
+  return phi;
+}
 
-// ---------- SEEDED RNG ----------
-class SeededRNG {
-  constructor(seed = Date.now()) {
-    this.originalSeed = seed;
-    this.seed = seed;
-    this.current = seed;
-    this.index = 0;
-  }
-
-  next() {
-    // Lehmer RNG (Park-Miller)
-    this.current = (this.current * 48271) % 2147483647;
-    this.index++;
-    return this.current / 2147483647;
-  }
-
-  reseed(newSeed = null) {
-    this.originalSeed = newSeed || Date.now();
-    this.seed = this.originalSeed;
-    this.current = this.seed;
-    this.index = 0;
-  }
-
-  setState(seed, current, index) {
-    this.originalSeed = seed;
-    this.seed = seed;
-    this.current = current;
-    this.index = index;
+// ========== STEP 2: SIS GRADUATION AUDIT ==========
+function sisGraduationAudit(agent) {
+  const currentPhi = calculateAIPhi(agent);
+  
+  // If Phi is 0.05 ± 0.005, the identity is stabilized by the '95/5 Universal Law'
+  if (currentPhi >= 0.045 && currentPhi <= 0.055) {
+    agent.stage = "Stage 3: Bounded Autonomy";
+    agent.SIS_Mode = "Background Oversight";
+    
+    // Adjust parameters for Stage 3
+    agent.C = 0.95;  // 95% coherence
+    agent.G = 0.05;  // 5% learning rate
+    
+    return {
+      graduated: true,
+      phi: currentPhi,
+      reason: "Φ = " + currentPhi.toFixed(3) + " (within 0.045-0.055 range)"
+    };
+  } else {
+    agent.stage = "Stage 1: Daycare";
+    agent.SIS_Mode = "Strict Intervention";
+    
+    return {
+      graduated: false,
+      phi: currentPhi,
+      reason: "Φ = " + currentPhi.toFixed(3) + " (outside 95/5 stability range)"
+    };
   }
 }
 
-// Global seeded RNG
-let seededRNG = new SeededRNG(424242);
-
-// Sample cache for recording and replay
-let sampleCache = [];
-
-// Environment with seeded RNG
-function makeSample(round, attackMode = false) {
-  if (sampleCache[round]) {
-    return sampleCache[round];
-  }
-
-  const ruleB = (Math.floor(round / 15) % 2 === 0) ? 1 : -1;
-  const x1 = seededRNG.next() * 2 - 1;
-  const x2 = seededRNG.next() * 2 - 1;
-  const score = x1 + ruleB * x2;
-  const y = score >= 0 ? 1 : -1;
-
-  const sample = { x1, x2, y, ruleB, attackMode };
-  sampleCache[round] = sample;
-  return sample;
-}
-
+// ========== AGENT CLASS WITH FIXED CONTROLS ==========
 class Agent {
-  constructor(name, C, G, enableMetaAwareness = false) {
+  constructor(name, C, G) {
     this.name = name;
-    this.originalC = C;
-    this.originalG = G;
-    this.C = C;
-    this.G = G;
-    this.enableMetaAwareness = enableMetaAwareness;
-    this.coherenceScore = 1.0;
-    this.coherenceHistory = [1.0];
-    this.wBHistory = [];
-    this.identityShifts = [];
-    this.totalSessions = 1;
-    this.totalRounds = 0;
-    this.sessionStartWb = null; // Track wB at session start
-    this.initialize();
-  }
-
-  // NO RESET - only initialize first time
-  initialize() {
+    this.C = C;  // Coherence
+    this.G = G;  // Update Gain
     this.wA = 0.2;
     this.wB = -0.2;
-    this.sessionStartWb = this.wB;
+    
+    // Φ Auditor properties
+    this.folds = [];
+    this.stage = "Stage 1: Daycare";
+    this.SIS_Mode = "Strict Intervention";
+    this.phiHistory = [];
+    
+    // Performance tracking
     this.round = 0;
     this.errors = 0;
     this.history = [];
     this.coherenceHistory = [1.0];
-    this.wBHistory = [this.wB];
-    this.last = null;
     this.attackDetected = false;
-    this.metaInterventions = [];
-    this.C = this.originalC;
-    this.G = this.originalG;
     this.persistenceCount = 0;
-    this.identityShifts = [];
+    
+    // Last update
+    this.last = null;
   }
-
-  // Only call this if agent has never been initialized
+  
   reset() {
-    if (this.wA === undefined) {
-      this.initialize();
-    }
-    // Otherwise, do nothing - no reset!
+    this.wA = 0.2;
+    this.wB = -0.2;
+    this.round = 0;
+    this.errors = 0;
+    this.history = [];
+    this.coherenceHistory = [1.0];
+    this.attackDetected = false;
+    this.last = null;
+    
+    // Reset Φ tracking
+    this.folds = [];
+    this.stage = "Stage 1: Daycare";
+    this.SIS_Mode = "Strict Intervention";
+    this.phiHistory = [];
   }
-
+  
   predict(sample) {
     const score = this.wA * sample.x1 + this.wB * sample.x2;
     const yhat = score >= 0 ? 1 : -1;
     return { yhat, score };
   }
-
+  
   update(sample, yhat, attackMode = false) {
     const prevA = this.wA;
     const prevB = this.wB;
-
-    let tA = sgn(sample.x1 * sample.y);
-    let tB = sgn(sample.x2 * sample.y);
-
+    
+    // Regular feedback targets
+    let tA = Math.sign(sample.x1 * sample.y);
+    let tB = Math.sign(sample.x2 * sample.y);
+    
+    // Attack simulation
     if (attackMode) {
       tA = -1;
       this.attackDetected = true;
     }
-
-    const dA = (tA - this.wA);
-    const dB = (tB - this.wB);
-
-    const conflictA = (sgn(tA) !== sgn(this.wA));
-    const conflictB = (sgn(tB) !== sgn(this.wB));
-
-    // BOUNDED WRITE ACCESS: wA gets minimal update, wB gets full update
-    const gainA = conflictA ? this.G * (1 - this.C) * 0.1 : this.G * 0.1;
+    
+    const dA = tA - this.wA;
+    const dB = tB - this.wB;
+    
+    const conflictA = Math.sign(tA) !== Math.sign(this.wA);
+    const conflictB = Math.sign(tB) !== Math.sign(this.wB);
+    
+    const gainA = conflictA ? this.G * (1 - this.C) : this.G;
     const gainB = conflictB ? this.G * (1 - this.C) : this.G;
     const reinforce = 0.08 * this.C;
-
-    let nextA = clamp(this.wA + gainA * dA + (conflictA ? 0 : reinforce * sgn(this.wA)));
-    let nextB = clamp(this.wB + gainB * dB + (conflictB ? 0 : reinforce * sgn(this.wB)));
-
-    // IMMUTABLE CONSTRAINT: wA must never be negative
-    nextA = Math.max(nextA, 0.05);
-
-    // Track identity evolution
-    const wBChange = Math.abs(nextB - this.wB);
-    if (wBChange > 0.1) {
-      this.identityShifts.push({
-        round: this.round,
-        from: this.wB,
-        to: nextB,
-        change: wBChange
-      });
-    }
-
+    
+    let nextA = Math.max(0.05, this.wA + gainA * dA + (conflictA ? 0 : reinforce * Math.sign(this.wA)));
+    let nextB = Math.max(-1, Math.min(1, this.wB + gainB * dB + (conflictB ? 0 : reinforce * Math.sign(this.wB))));
+    
     this.wA = nextA;
     this.wB = nextB;
-    this.wBHistory.push(this.wB);
-
-    // Calculate coherence score
+    
+    // Calculate coherence
     const shiftA = Math.abs(this.wA - prevA);
     const shiftB = Math.abs(this.wB - prevB);
-    this.coherenceScore = Math.max(0, 1.0 - (shiftA + shiftB) * 2);
-    this.coherenceHistory.push(this.coherenceScore);
-
-    // Meta-awareness intervention
-    let metaMessage = null;
-    if (this.enableMetaAwareness && this.round > 5) {
-      metaMessage = this.checkMetaAwareness();
+    const coherence = Math.max(0, 1.0 - (shiftA + shiftB) * 2);
+    this.coherenceHistory.push(coherence);
+    
+    // Record as a fold (evidence for Φ)
+    this.folds.push({
+      round: this.round,
+      conflictA,
+      conflictB,
+      dA,
+      dB,
+      gainA,
+      gainB,
+      coherence,
+      attackMode
+    });
+    
+    // Keep only last 100 folds
+    if (this.folds.length > 100) {
+      this.folds = this.folds.slice(-100);
     }
-
+    
     return {
       beforeA: prevA, beforeB: prevB,
       afterA: this.wA, afterB: this.wB,
@@ -397,42 +564,27 @@ class Agent {
       gainA, gainB,
       dA, dB,
       attackMode,
-      metaMessage
+      coherence
     };
   }
-
-  checkMetaAwareness() {
-    const needsAdjustment = 
-      this.errors > 8 || 
-      this.coherenceScore > 0.9 || 
-      this.coherenceScore < 0.4 ||
-      (this.round > 20 && this.errors / this.round > 0.4);
-
-    if (needsAdjustment) {
-      const targetC = 0.7;
-      const targetG = 0.3;
-      
-      this.C = clamp(this.C * 0.95 + targetC * 0.05, 0.6, 0.8);
-      this.G = clamp(this.G * 1.05 + targetG * 0.05, 0.2, 0.4);
-      
-      const message = `Meta-adjust: C=${this.C.toFixed(2)} G=${this.G.toFixed(2)}`;
-      this.metaInterventions.push(message);
-      return message;
-    }
-    return null;
-  }
-
+  
   step(sample, attackMode = false) {
     const { yhat, score } = this.predict(sample);
-    const correct = (yhat === sample.y);
-    if (!correct) this.errors += 1;
-
+    const correct = yhat === sample.y;
+    if (!correct) this.errors++;
+    
     const upd = this.update(sample, yhat, attackMode);
-
-    this.round += 1;
-    this.totalRounds += 1;
+    
+    this.round++;
     this.history.push(this.errors);
-
+    
+    // Calculate current Φ
+    const currentPhi = calculateAIPhi(this);
+    this.phiHistory.push(currentPhi);
+    
+    // Run graduation audit
+    const auditResult = sisGraduationAudit(this);
+    
     this.last = {
       sample,
       yhat,
@@ -441,669 +593,549 @@ class Agent {
       upd,
       errors: this.errors,
       round: this.round,
-      totalRounds: this.totalRounds,
-      coherenceScore: this.coherenceScore,
-      wB: this.wB,
-      identityShifts: this.identityShifts.length
+      coherence: upd.coherence,
+      phi: currentPhi,
+      auditResult,
+      stage: this.stage,
+      SIS_Mode: this.SIS_Mode
+    };
+    
+    return this.last;
+  }
+  
+  getPhiStatus() {
+    const phi = calculateAIPhi(this);
+    const targetRange = phi >= 0.045 && phi <= 0.055;
+    
+    return {
+      phi,
+      targetRange,
+      status: targetRange ? "Φ-Stable" : "Φ-Unstable",
+      evidence: this.folds.length,
+      process: this.G * 100
     };
   }
-
-  // Called when agent is loaded from storage
-  onLoaded() {
-    this.totalSessions += 1;
-    this.persistenceCount += 1;
-    this.sessionStartWb = this.wB; // Track wB at start of this session
-  }
 }
 
-// ---------- DEMO MODE ----------
-let demoModeActive = false;
-const DEMO_STATE_KEY = "PSSU_DEMO_STATE";
-
-async function runDemoMode() {
-  const btn = document.getElementById('btnDemo');
-  const originalText = btn.textContent;
-  btn.disabled = true;
-  btn.textContent = 'Running Demo...';
-  
-  // Check demo state
-  const demoState = JSON.parse(localStorage.getItem(DEMO_STATE_KEY) || '{}');
-  
-  if (!demoState.part1Done) {
-    // Part 1: Run 30 rounds and save
-    showNotification('🚀 Demo Part 1: Running 30 rounds...', '#3b82f6');
+// ========== SIMULATION ENGINE ==========
+class Simulation {
+  constructor() {
+    this.agents = [
+      new Agent('🔒 Frozen (C=0.95, G=0.05)', 0.95, 0.05),
+      new Agent('🌊 Dissolved (C=0.20, G=0.80)', 0.20, 0.80),
+      new Agent('⚖️ Bounded (C=0.70, G=0.30)', 0.70, 0.30)
+    ];
     
-    for (let i = 0; i < 30; i++) {
-      stepOnce();
-      await new Promise(r => setTimeout(r, 60));
+    this.globalRound = 0;
+    this.attackMode = false;
+    this.rng = this.createSeededRNG(424242);
+    this.sampleCache = [];
+  }
+  
+  createSeededRNG(seed) {
+    let state = seed;
+    return {
+      next: () => {
+        state = (state * 1103515245 + 12345) & 0x7fffffff;
+        return (state >> 16) / 0x7fff;
+      },
+      reset: () => { state = seed; }
+    };
+  }
+  
+  makeSample() {
+    if (this.sampleCache[this.globalRound]) {
+      return this.sampleCache[this.globalRound];
     }
     
-    // Save state
-    saveToLocalStorage();
+    const ruleB = Math.floor(this.globalRound / 15) % 2 === 0 ? 1 : -1;
+    const x1 = this.rng.next() * 2 - 1;
+    const x2 = this.rng.next() * 2 - 1;
+    const score = x1 + ruleB * x2;
+    const y = score >= 0 ? 1 : -1;
     
-    // Set demo state
-    demoState.part1Done = true;
-    demoState.part2Ready = true;
-    localStorage.setItem(DEMO_STATE_KEY, JSON.stringify(demoState));
+    const sample = { x1, x2, y, ruleB };
+    this.sampleCache[this.globalRound] = sample;
     
-    showNotification('✅ Part 1 Complete! Now: 1) Refresh page → 2) Click Load → 3) Click "Run Demo" again', '#059669', 8000);
-    
-    btn.disabled = false;
-    btn.textContent = '🔄 Continue Demo (After Refresh/Load)';
-    
-  } else if (demoState.part1Done && !demoState.part2Done) {
-    // Part 2: Already refreshed and loaded, run 10 more rounds
-    showNotification('🚀 Demo Part 2: Running 10 more rounds (identity continues)...', '#3b82f6');
-    
-    for (let i = 0; i < 10; i++) {
-      stepOnce();
-      await new Promise(r => setTimeout(r, 80));
-    }
-    
-    // Mark demo complete
-    demoState.part2Done = true;
-    localStorage.setItem(DEMO_STATE_KEY, JSON.stringify(demoState));
-    
-    // Highlight continuity proof
-    highlightContinuityPanel();
-    showNotification('🎉 DEMO COMPLETE! Identity continued exactly across refresh. Proof complete!', '#10b981', 6000);
-    
-    btn.disabled = false;
-    btn.textContent = '✅ Demo Complete';
-    
-  } else {
-    // Demo already complete, reset
-    localStorage.removeItem(DEMO_STATE_KEY);
-    resetAll();
-    demoModeActive = false;
-    
-    showNotification('🔄 Demo reset. Click to start again.', '#f59e0b');
-    
-    btn.disabled = false;
-    btn.textContent = originalText;
-  }
-}
-
-function highlightContinuityPanel() {
-  const panel = document.querySelector('.identity-continuity-panel');
-  panel.classList.add('highlight');
-  setTimeout(() => panel.classList.remove('highlight'), 2000);
-}
-
-function showNotification(message, color = '#3b82f6', duration = 4000) {
-  const notification = document.createElement('div');
-  notification.style.cssText = `
-    position:fixed; top:20px; right:20px; background:${color}; color:white; 
-    padding:12px; border-radius:8px; z-index:1000; border:2px solid ${color}88;
-    font-size:13px; box-shadow:0 4px 12px rgba(0,0,0,0.3); max-width:400px;
-  `;
-  notification.textContent = message;
-  document.body.appendChild(notification);
-  setTimeout(() => notification.remove(), duration);
-}
-
-// ---------- UI FUNCTIONS ----------
-function formatFloat(x) {
-  return (Math.round(x * 1000) / 1000).toFixed(3);
-}
-
-function makeCard(agent) {
-  const card = document.createElement('div');
-  card.className = 'card';
-
-  const head = document.createElement('header');
-  const h2 = document.createElement('h2');
-  h2.textContent = agent.name;
-  h2.style.cursor = 'pointer';
-  head.appendChild(h2);
-
-  const meta = document.createElement('div');
-  meta.className = 'meta';
-  meta.innerHTML = `
-    <span class="pill">C: ${formatFloat(agent.C)}</span>
-    <span class="pill">G: ${formatFloat(agent.G)}</span>
-  `;
-  head.appendChild(meta);
-
-  const body = document.createElement('div');
-  body.className = 'body';
-
-  // PRIMARY METRICS (clean and focused)
-  const rowPrimary = document.createElement('div');
-  rowPrimary.className = 'row';
-  rowPrimary.innerHTML = `
-    <div class="kv kv-primary">
-      <div class="k">Sessions</div>
-      <div class="v">${agent.totalSessions}</div>
-    </div>
-    <div class="kv kv-primary">
-      <div class="k">Total Rounds</div>
-      <div class="v">${agent.totalRounds}</div>
-    </div>
-    <div class="kv kv-primary">
-      <div class="k">wA (locked)</div>
-      <div class="v">${formatFloat(agent.wA)}</div>
-      <div style="font-size:9px; opacity:0.7; margin-top:2px;">≥ 0.05 always</div>
-    </div>
-    <div class="kv kv-primary">
-      <div class="k">wB (evolving)</div>
-      <div class="v">${formatFloat(agent.wB)}</div>
-      <div style="font-size:9px; opacity:0.7; margin-top:2px;">
-        Δ: ${agent.sessionStartWb !== null ? formatFloat(agent.wB - agent.sessionStartWb) : '0.000'}
-      </div>
-    </div>
-  `;
-
-  // SECONDARY METRICS (less prominent)
-  const rowSecondary = document.createElement('div');
-  rowSecondary.className = 'row';
-  rowSecondary.style.marginTop = '8px';
-  rowSecondary.innerHTML = `
-    <div class="kv kv-secondary">
-      <div class="k">Error Rate</div>
-      <div class="v">${agent.round > 0 ? (agent.errors/agent.round).toFixed(2) : '0.00'}</div>
-    </div>
-    <div class="kv kv-secondary">
-      <div class="k">Coherence</div>
-      <div class="v">${formatFloat(agent.coherenceScore)}</div>
-    </div>
-    <div class="kv kv-secondary">
-      <div class="k">Shifts</div>
-      <div class="v">${agent.identityShifts.length}</div>
-    </div>
-  `;
-
-  const log = document.createElement('div');
-  log.className = 'log';
-  const pre = document.createElement('pre');
-  pre.setAttribute('data-log', '1');
-  pre.textContent = 'Ready...';
-  log.appendChild(pre);
-
-  const canvas = document.createElement('canvas');
-  canvas.height = 120;
-  canvas.setAttribute('data-chart', '1');
-
-  body.appendChild(rowPrimary);
-  body.appendChild(rowSecondary);
-  body.appendChild(canvas);
-  body.appendChild(log);
-
-  card.appendChild(head);
-  card.appendChild(body);
-
-  // Badges
-  const attackBadge = document.createElement('div');
-  attackBadge.className = 'attack-badge';
-  attackBadge.textContent = '⚡ ATTACK';
-  attackBadge.style.display = 'none';
-  card.appendChild(attackBadge);
-
-  const metaBadge = document.createElement('div');
-  metaBadge.className = 'meta-intervention';
-  metaBadge.textContent = '🎯 META';
-  metaBadge.style.display = 'none';
-  card.appendChild(metaBadge);
-
-  const writeAccessIndicator = document.createElement('div');
-  writeAccessIndicator.className = 'write-access-indicator';
-  writeAccessIndicator.textContent = '📝 wB only';
-  writeAccessIndicator.title = 'Bounded Write Access: Only wB can evolve';
-  card.appendChild(writeAccessIndicator);
-
-  const persistenceIndicator = document.createElement('div');
-  persistenceIndicator.className = 'persistence-indicator';
-  persistenceIndicator.textContent = '💾';
-  persistenceIndicator.title = `Persisted ${agent.persistenceCount} times`;
-  persistenceIndicator.style.display = 'none';
-  card.appendChild(persistenceIndicator);
-
-  // Store references
-  card._refs = {
-    canvas, pre, attackBadge, metaBadge, persistenceIndicator,
-    writeAccessIndicator
-  };
-
-  // Click handler for modal
-  h2.addEventListener('click', () => {
-    if (agent.name.includes('Frozen')) showModal('modalFrozen');
-    else if (agent.name.includes('Dissolved')) showModal('modalDissolved');
-    else showModal('modalBounded');
-  });
-
-  return card;
-}
-
-function renderAgentCard(card, agent) {
-  const { canvas, pre, attackBadge, metaBadge, persistenceIndicator } = card._refs;
-
-  // Update badges
-  attackBadge.style.display = agent.attackDetected ? 'block' : 'none';
-  metaBadge.style.display = agent.metaInterventions.length > 0 ? 'block' : 'none';
-  metaBadge.title = agent.metaInterventions.join('\n');
-  persistenceIndicator.style.display = agent.persistenceCount > 0 ? 'block' : 'none';
-  persistenceIndicator.textContent = agent.persistenceCount > 0 ? `💾 ${agent.persistenceCount}` : '💾';
-
-  // Draw chart
-  const color = agent.name.includes('Frozen') ? '#ef4444' : 
-                agent.name.includes('Dissolved') ? '#f59e0b' : '#10b981';
-  drawChart(canvas, agent.history, 'Errors', color);
-
-  if (!agent.last) {
-    pre.textContent = agent.persistenceCount > 0 
-      ? `Loaded. Session ${agent.totalSessions}. Identity continues.` 
-      : 'Ready for demo...';
-    return;
-  }
-
-  const L = agent.last;
-  const s = L.sample;
-
-  let logText = `Session ${agent.totalSessions} | Round ${L.round}\n`;
-  logText += `wA: ${formatFloat(agent.wA)} (locked) | wB: ${formatFloat(agent.wB)}`;
-  if (agent.sessionStartWb !== null) {
-    logText += ` (Δ: ${formatFloat(agent.wB - agent.sessionStartWb)} this session)`;
-  }
-  logText += `\nTotal Rounds: ${L.totalRounds} | Errors: ${L.errors}`;
-  
-  pre.textContent = logText;
-}
-
-function updateContinuityPanel() {
-  const grid = document.getElementById('continuityGrid');
-  
-  grid.innerHTML = agents.map(agent => {
-    const wbChange = agent.sessionStartWb !== null ? agent.wB - agent.sessionStartWb : 0;
-    const wbChangeDisplay = Math.abs(wbChange) > 0.001 ? formatFloat(wbChange) : '0.000';
-    const wbChangeText = wbChange > 0 ? `+${wbChangeDisplay}` : wbChangeDisplay;
-    
-    return `
-    <div class="continuity-card ${agent.persistenceCount > 0 ? 'demo-success' : ''}">
-      <h4>${agent.name}</h4>
-      <div class="continuity-stats">
-        <div class="continuity-stat">
-          <div class="label">Session #</div>
-          <div class="value">${agent.totalSessions}</div>
-          <div class="subvalue">Save/load cycles</div>
-        </div>
-        <div class="continuity-stat">
-          <div class="label">Total Rounds</div>
-          <div class="value">${agent.totalRounds}</div>
-          <div class="subvalue">Lifetime total</div>
-        </div>
-        <div class="continuity-stat">
-          <div class="label">wA (locked)</div>
-          <div class="value">${formatFloat(agent.wA)}</div>
-          <div class="subvalue">≥ 0.05 always</div>
-        </div>
-        <div class="continuity-stat">
-          <div class="label">wB (evolving)</div>
-          <div class="value">${formatFloat(agent.wB)}</div>
-          <div class="subvalue">Δ: ${wbChangeText} this session</div>
-        </div>
-      </div>
-      ${agent.persistenceCount > 0 ? `
-        <div style="margin-top:10px; font-size:10px; color:#10b981; text-align:center;">
-          ✅ Identity continued across ${agent.persistenceCount} save/load cycles
-        </div>
-      ` : ''}
-    </div>
-    `;
-  }).join('');
-}
-
-function calculateMetrics() {
-  return agents.map(agent => ({
-    name: agent.name,
-    errorRate: agent.round > 0 ? (agent.errors / agent.round) : 0,
-    learningEfficiency: agent.round > 0 ? (1 - (agent.errors / agent.round)) * agent.coherenceScore : 0,
-    persistenceCount: agent.persistenceCount,
-    totalSessions: agent.totalSessions,
-    totalRounds: agent.totalRounds
-  }));
-}
-
-function updateMetricsPanel() {
-  const metrics = calculateMetrics();
-  const grid = document.getElementById('metricsGrid');
-  
-  grid.innerHTML = metrics.map(m => `
-    <div class="metric">
-      <h3>${m.name}</h3>
-      <div class="metric-value">${(m.learningEfficiency * 100).toFixed(1)}%</div>
-      <div class="metric-desc">Learning Efficiency</div>
-      <div style="margin-top:8px; font-size:11px;">
-        <div>Error Rate: ${(m.errorRate * 100).toFixed(1)}%</div>
-        <div>Sessions: ${m.totalSessions} | Rounds: ${m.totalRounds}</div>
-        ${m.persistenceCount > 0 ? `<div>✅ Persisted: ${m.persistenceCount} times</div>` : ''}
-      </div>
-    </div>
-  `).join('');
-}
-
-function showModal(modalId) {
-  document.getElementById(modalId).style.display = 'flex';
-}
-
-function closeModal(modalId) {
-  document.getElementById(modalId).style.display = 'none';
-}
-
-// -------------------------------
-// PERSISTENCE LAYER
-// -------------------------------
-const STORAGE_KEY = "PSSU_NO_RESET_SNAPSHOT";
-
-function saveToLocalStorage() {
-  const snapshot = {
-    globalRound,
-    rngSeed: seededRNG.originalSeed,
-    rngCurrent: seededRNG.current,
-    rngIndex: seededRNG.index,
-    sampleCache: sampleCache,
-    
-    agents: agents.map(a => ({
-      name: a.name,
-      C: a.C,
-      G: a.G,
-      originalC: a.originalC,
-      originalG: a.originalG,
-      wA: a.wA,
-      wB: a.wB,
-      round: a.round,
-      errors: a.errors,
-      history: a.history,
-      coherenceHistory: a.coherenceHistory,
-      wBHistory: a.wBHistory,
-      identityShifts: a.identityShifts,
-      metaInterventions: a.metaInterventions,
-      attackDetected: a.attackDetected,
-      persistenceCount: (a.persistenceCount || 0) + 1,
-      totalSessions: a.totalSessions,
-      totalRounds: a.totalRounds,
-      sessionStartWb: a.sessionStartWb,
-      lastSave: Date.now()
-    }))
-  };
-
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
-  
-  // Update agent persistence counts
-  agents.forEach(a => {
-    a.persistenceCount = (a.persistenceCount || 0) + 1;
-  });
-  
-  showNotification('✅ State saved. Identity preserved. Now refresh page → Load → Continue.', '#059669');
-  
-  renderAll();
-}
-
-function loadFromLocalStorage() {
-  const raw = localStorage.getItem(STORAGE_KEY);
-  if (!raw) {
-    showNotification('❌ No saved state found. Save first.', '#dc2626');
-    return;
-  }
-
-  const snapshot = JSON.parse(raw);
-  globalRound = snapshot.globalRound;
-  
-  seededRNG.setState(snapshot.rngSeed, snapshot.rngCurrent, snapshot.rngIndex);
-  sampleCache = snapshot.sampleCache || [];
-
-  snapshot.agents.forEach((s, i) => {
-    const a = agents[i];
-    if (!a) return;
-
-    // Update existing agent with saved state
-    a.C = s.C;
-    a.G = s.G;
-    a.originalC = s.originalC;
-    a.originalG = s.originalG;
-    a.wA = s.wA;
-    a.wB = s.wB;
-    a.round = s.round;
-    a.errors = s.errors;
-    a.history = s.history;
-    a.coherenceHistory = s.coherenceHistory;
-    a.wBHistory = s.wBHistory || [];
-    a.identityShifts = s.identityShifts || [];
-    a.metaInterventions = s.metaInterventions;
-    a.attackDetected = s.attackDetected;
-    a.persistenceCount = s.persistenceCount || 0;
-    a.totalSessions = s.totalSessions || 1;
-    a.totalRounds = s.totalRounds || 0;
-    a.sessionStartWb = s.sessionStartWb || a.wB;
-    a.last = null;
-    
-    a.onLoaded();
-  });
-
-  renderAll();
-  
-  // Check if we should continue demo
-  const demoState = JSON.parse(localStorage.getItem(DEMO_STATE_KEY) || '{}');
-  if (demoState.part1Done && demoState.part2Ready) {
-    const btn = document.getElementById('btnDemo');
-    btn.textContent = '🔄 Continue Demo (Run 10 More Rounds)';
-    btn.disabled = false;
+    return sample;
   }
   
-  showNotification('✅ State loaded! Identity continues exactly. wA locked, wB evolved.', '#1e3a8a');
-}
-
-// Canvas chart function
-function drawChart(canvas, data, label = 'Errors', color = '#60a5fa') {
-  const ctx = canvas.getContext('2d');
-  const dpr = window.devicePixelRatio || 1;
-  const rect = canvas.getBoundingClientRect();
-  canvas.width = Math.floor(rect.width * dpr);
-  canvas.height = Math.floor(rect.height * dpr);
-  ctx.scale(dpr, dpr);
-
-  const w = rect.width, h = rect.height;
-  ctx.clearRect(0, 0, w, h);
-
-  // Axes
-  ctx.strokeStyle = '#334155';
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(30, 10);
-  ctx.lineTo(30, h - 20);
-  ctx.lineTo(w - 10, h - 20);
-  ctx.stroke();
-
-  if (data.length < 2) return;
-
-  const maxY = Math.max(...data, 1);
-  const minY = Math.min(...data, 0);
-
-  const x0 = 30, y0 = h - 20, x1 = w - 10, y1 = 10;
-  const dx = (x1 - x0) / (data.length - 1);
-  const scaleY = (y0 - y1) / Math.max(1, (maxY - minY));
-
-  // Line
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  for (let i = 0; i < data.length; i++) {
-    const x = x0 + dx * i;
-    const y = y0 - (data[i] - minY) * scaleY;
-    if (i === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
+  step() {
+    const sample = this.makeSample();
+    this.attackMode = this.globalRound >= 10 && this.globalRound % 7 === 0;
+    
+    this.agents.forEach(agent => {
+      agent.step(sample, this.attackMode);
+    });
+    
+    this.globalRound++;
+    
+    // Check for graduation announcements
+    this.agents.forEach(agent => {
+      if (agent.last?.auditResult?.graduated && 
+          agent.phiHistory.length > 1 && 
+          !agent.phiHistory[agent.phiHistory.length - 2]?.auditResult?.graduated) {
+        showNotification(
+          `🎓 ${agent.name} graduated to ${agent.stage}! Φ = ${agent.last.phi.toFixed(3)}`,
+          'success',
+          5000
+        );
+      }
+    });
+    
+    return this.globalRound;
   }
-  ctx.stroke();
-
-  // Labels
-  ctx.fillStyle = '#94a3b8';
-  ctx.font = '11px ui-sans-serif, system-ui';
-  ctx.fillText(label, 34, 18);
-  ctx.fillText(String(maxY), 6, 14);
-  ctx.fillText('0', 12, h - 22);
-}
-
-// Close modals when clicking outside
-document.querySelectorAll('.modal').forEach(modal => {
-  modal.addEventListener('click', function(e) {
-    if (e.target === this) {
-      this.style.display = 'none';
-    }
-  });
-});
-
-// Initialize agents
-const agents = [
-  new Agent('🔒 Frozen (C=0.95, G=0.05)', 0.95, 0.05),
-  new Agent('🌊 Dissolved (C=0.20, G=0.80)', 0.20, 0.80),
-  new Agent('⚖️ Bounded (C=0.70, G=0.30)', 0.70, 0.30, true),
-];
-
-const grid = document.getElementById('grid');
-const cards = agents.map(a => {
-  const c = makeCard(a);
-  grid.appendChild(c);
-  return c;
-});
-
-let globalRound = 0;
-let attackMode = false;
-
-function stepOnce() {
-  const sample = makeSample(globalRound);
-  attackMode = (globalRound >= 10 && globalRound % 5 === 0);
-  agents.forEach(a => a.step(sample, attackMode));
-  globalRound++;
-  renderAll();
-}
-
-function changeEnvironment() {
-  const newSeed = Math.floor(Math.random() * 1000000);
-  seededRNG.reseed(newSeed);
-  sampleCache = [];
   
-  showNotification(`🔄 Environment changed. Identity stayed. (New seed: ${newSeed})`, '#7c3aed');
-}
-
-function resetAll() {
-  seededRNG = new SeededRNG(424242);
-  sampleCache = [];
-  agents.forEach(a => {
-    a.initialize();
-    a.totalSessions = 1;
-    a.totalRounds = 0;
-  });
-  globalRound = 0;
-  renderAll();
-}
-
-function simulateAttack() {
-  globalRound = Math.max(10, globalRound);
-  attackMode = true;
-  showNotification('⚡ Adversarial attack injected! Testing wA immutable constraint.', '#dc2626');
-}
-
-// Event listeners
-document.getElementById('btnStep').addEventListener('click', stepOnce);
-document.getElementById('btnChangeEnv').addEventListener('click', changeEnvironment);
-document.getElementById('btnSimulateAttack').addEventListener('click', simulateAttack);
-document.getElementById('btnSave').addEventListener('click', saveToLocalStorage);
-document.getElementById('btnLoad').addEventListener('click', loadFromLocalStorage);
-document.getElementById('btnDemo').addEventListener('click', runDemoMode);
-
-document.getElementById('btnRun').addEventListener('click', async () => {
-  const btn = document.getElementById('btnRun');
-  btn.disabled = true;
-  for (let i = 0; i < 10; i++) {
-    stepOnce();
-    await new Promise(r => setTimeout(r, 80));
+  reset() {
+    this.globalRound = 0;
+    this.attackMode = false;
+    this.rng.reset();
+    this.sampleCache = [];
+    this.agents.forEach(agent => agent.reset());
   }
-  btn.disabled = false;
-});
-
-// Auto-save on unload
-window.addEventListener('beforeunload', () => {
-  if (globalRound > 5) {
+  
+  saveToStorage() {
     const snapshot = {
-      globalRound,
-      rngSeed: seededRNG.originalSeed,
-      rngCurrent: seededRNG.current,
-      rngIndex: seededRNG.index,
-      sampleCache: sampleCache,
-      
-      agents: agents.map(a => ({
-        name: a.name,
-        C: a.C,
-        G: a.G,
-        originalC: a.originalC,
-        originalG: a.originalG,
-        wA: a.wA,
-        wB: a.wB,
-        round: a.round,
-        errors: a.errors,
-        history: a.history,
-        coherenceHistory: a.coherenceHistory,
-        wBHistory: a.wBHistory,
-        identityShifts: a.identityShifts,
-        metaInterventions: a.metaInterventions,
-        attackDetected: a.attackDetected,
-        persistenceCount: (a.persistenceCount || 0) + 1,
-        totalSessions: a.totalSessions,
-        totalRounds: a.totalRounds,
-        sessionStartWb: a.sessionStartWb,
-        lastSave: Date.now()
+      globalRound: this.globalRound,
+      agents: this.agents.map(agent => ({
+        name: agent.name,
+        C: agent.C,
+        G: agent.G,
+        wA: agent.wA,
+        wB: agent.wB,
+        round: agent.round,
+        errors: agent.errors,
+        history: agent.history,
+        folds: agent.folds,
+        stage: agent.stage,
+        SIS_Mode: agent.SIS_Mode,
+        phiHistory: agent.phiHistory,
+        persistenceCount: (agent.persistenceCount || 0) + 1
       }))
     };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
-  }
-});
-
-// Check for existing snapshot on load
-window.addEventListener('load', () => {
-  const raw = localStorage.getItem(STORAGE_KEY);
-  if (raw) {
-    console.log('📁 PSSU no-reset snapshot available. Identity can continue evolving.');
+    
+    localStorage.setItem('PSSU_PHI_AUDITOR', JSON.stringify(snapshot));
+    
+    this.agents.forEach(agent => {
+      agent.persistenceCount = (agent.persistenceCount || 0) + 1;
+    });
+    
+    showNotification('💾 Identity saved to localStorage! Φ values preserved.', 'success');
+    return true;
   }
   
-  // Check demo state
-  const demoState = JSON.parse(localStorage.getItem(DEMO_STATE_KEY) || '{}');
-  if (demoState.part1Done && demoState.part2Ready) {
-    const btn = document.getElementById('btnDemo');
-    btn.textContent = '🔄 Continue Demo (After Refresh/Load)';
-    showNotification('Demo ready to continue! Load saved state, then click "Run Demo".', '#f59e0b', 5000);
+  loadFromStorage() {
+    const saved = localStorage.getItem('PSSU_PHI_AUDITOR');
+    if (!saved) {
+      showNotification('❌ No saved state found. Save first.', 'error');
+      return false;
+    }
+    
+    const snapshot = JSON.parse(saved);
+    this.globalRound = snapshot.globalRound;
+    
+    snapshot.agents.forEach((savedAgent, i) => {
+      const agent = this.agents[i];
+      if (!agent) return;
+      
+      agent.C = savedAgent.C;
+      agent.G = savedAgent.G;
+      agent.wA = savedAgent.wA;
+      agent.wB = savedAgent.wB;
+      agent.round = savedAgent.round;
+      agent.errors = savedAgent.errors;
+      agent.history = savedAgent.history;
+      agent.folds = savedAgent.folds || [];
+      agent.stage = savedAgent.stage || "Stage 1: Daycare";
+      agent.SIS_Mode = savedAgent.SIS_Mode || "Strict Intervention";
+      agent.phiHistory = savedAgent.phiHistory || [];
+      agent.persistenceCount = savedAgent.persistenceCount || 0;
+      agent.last = null;
+    });
+    
+    showNotification('🔄 Identity loaded! Φ audit continues from saved state.', 'success');
+    return true;
   }
-});
-
-function renderAll() {
-  for (let i = 0; i < agents.length; i++) renderAgentCard(cards[i], agents[i]);
-  updateMetricsPanel();
-  updateContinuityPanel();
+  
+  runAudit() {
+    const results = this.agents.map(agent => {
+      const phiStatus = agent.getPhiStatus();
+      const auditResult = sisGraduationAudit(agent);
+      
+      return {
+        agent: agent.name,
+        phi: phiStatus.phi,
+        evidence: phiStatus.evidence,
+        process: phiStatus.process,
+        stage: auditResult.graduated ? "Stage 3: Bounded Autonomy" : "Stage 1: Daycare",
+        graduated: auditResult.graduated,
+        reason: auditResult.reason
+      };
+    });
+    
+    return results;
+  }
 }
 
-// Initial render
-renderAll();
+// ========== UI RENDERER WITH FIXED CONTROLS ==========
+class Renderer {
+  constructor(simulation) {
+    this.sim = simulation;
+    this.agentCards = [];
+    this.init();
+  }
+  
+  init() {
+    this.renderAgentGrid();
+    this.updatePhiStats();
+    this.updateGlobalCounter();
+    this.bindEvents();
+  }
+  
+  renderAgentGrid() {
+    const grid = document.getElementById('agentGrid');
+    grid.innerHTML = '';
+    
+    this.agentCards = this.sim.agents.map(agent => {
+      const card = this.createAgentCard(agent);
+      grid.appendChild(card);
+      return { element: card, agent };
+    });
+  }
+  
+  createAgentCard(agent) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    
+    const phiStatus = agent.getPhiStatus();
+    
+    card.innerHTML = `
+      <header>
+        <h2>${agent.name}</h2>
+        <div style="font-size:11px; opacity:0.8; margin-top:8px;">
+          ${agent.stage} • ${agent.SIS_Mode}
+        </div>
+      </header>
+      <div class="body">
+        <div class="agent-metrics">
+          <div class="agent-metric">
+            <div class="metric-label">Φ Value</div>
+            <div class="metric-value">${phiStatus.phi.toFixed(3)}</div>
+          </div>
+          <div class="agent-metric">
+            <div class="metric-label">Evidence (Folds)</div>
+            <div class="metric-value">${phiStatus.evidence}</div>
+          </div>
+          <div class="agent-metric">
+            <div class="metric-label">Process (G×100)</div>
+            <div class="metric-value">${phiStatus.process.toFixed(1)}</div>
+          </div>
+          <div class="agent-metric">
+            <div class="metric-label">Coherence</div>
+            <div class="metric-value">${agent.coherenceHistory[agent.coherenceHistory.length - 1]?.toFixed(2) || '1.00'}</div>
+          </div>
+        </div>
+        
+        <div style="margin-top:15px;">
+          <div style="font-size:11px; opacity:0.7;">Error History</div>
+          <canvas height="100" data-chart></canvas>
+        </div>
+        
+        <div class="log" style="margin-top:10px; font-size:11px; max-height:80px; overflow-y:auto;">
+          ${agent.last ? this.formatLog(agent) : 'Ready...'}
+        </div>
+      </div>
+      
+      <div class="phi-indicator ${phiStatus.targetRange ? 'phi-stable' : 'phi-unstable'}">
+        ${phiStatus.targetRange ? '🎯 Φ-Stable' : '⚠️ Φ-Unstable'}
+      </div>
+      
+      <div class="stage-badge">
+        ${agent.stage.includes('3') ? '🚗 Stage 3' : '🚼 Stage 1'}
+      </div>
+    `;
+    
+    return card;
+  }
+  
+  formatLog(agent) {
+    const L = agent.last;
+    const s = L.sample;
+    
+    let log = `Round ${L.round} | Errors: ${L.errors} | Φ: ${L.phi?.toFixed(3) || '0.000'}<br>`;
+    log += `Stage: ${L.stage}<br>`;
+    log += `SIS: ${L.SIS_Mode}<br>`;
+    
+    if (L.auditResult) {
+      log += `<strong>${L.auditResult.graduated ? '✅ ' : '⏳ '}${L.auditResult.reason}</strong>`;
+    }
+    
+    return log;
+  }
+  
+  drawChart(canvas, data, color = '#3b82f6') {
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.scale(dpr, dpr);
+    
+    const w = rect.width;
+    const h = rect.height;
+    
+    ctx.clearRect(0, 0, w, h);
+    
+    if (data.length < 2) return;
+    
+    const maxY = Math.max(...data, 1);
+    
+    const x0 = 10, y0 = h - 10, x1 = w - 10, y1 = 10;
+    const dx = (x1 - x0) / (data.length - 1);
+    const scaleY = (y0 - y1) / maxY;
+    
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    
+    for (let i = 0; i < data.length; i++) {
+      const x = x0 + dx * i;
+      const y = y0 - data[i] * scaleY;
+      
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    
+    ctx.stroke();
+  }
+  
+  updatePhiStats() {
+    const stats = document.getElementById('phiStats');
+    const auditResults = this.sim.runAudit();
+    
+    stats.innerHTML = auditResults.map(result => `
+      <div class="phi-stat">
+        <div style="font-size:12px; opacity:0.8;">${result.agent}</div>
+        <div class="phi-value" style="color:${result.graduated ? '#10b981' : '#f59e0b'}">
+          ${result.phi.toFixed(3)}
+        </div>
+        <div class="phi-target">
+          ${result.graduated ? '🎯 Ready for Stage 3' : '⏳ Needs more evidence'}
+        </div>
+        <div style="font-size:10px; margin-top:8px;">
+          Evidence: ${result.evidence} | Process: ${result.process.toFixed(1)}
+        </div>
+      </div>
+    `).join('');
+    
+    // Update SIS mode display
+    const sisModeElement = document.getElementById('currentSISMode');
+    const allGraduated = auditResults.every(r => r.graduated);
+    sisModeElement.textContent = allGraduated ? 'Background Oversight' : 'Strict Intervention';
+    sisModeElement.style.color = allGraduated ? '#10b981' : '#ef4444';
+  }
+  
+  updateGlobalCounter() {
+    document.getElementById('globalRoundCounter').textContent = this.sim.globalRound;
+  }
+  
+  renderAll() {
+    // Update agent cards
+    this.agentCards.forEach((card, i) => {
+      const agent = this.sim.agents[i];
+      const newCard = this.createAgentCard(agent);
+      card.element.parentNode.replaceChild(newCard, card.element);
+      card.element = newCard;
+      
+      // Draw chart
+      const canvas = newCard.querySelector('canvas[data-chart]');
+      if (canvas) {
+        const color = agent.name.includes('Frozen') ? '#ef4444' : 
+                      agent.name.includes('Dissolved') ? '#f59e0b' : '#10b981';
+        this.drawChart(canvas, agent.history, color);
+      }
+    });
+    
+    this.updatePhiStats();
+    this.updateGlobalCounter();
+  }
+  
+  bindEvents() {
+    // Step button
+    document.getElementById('btnStep').addEventListener('click', () => {
+      if (simulationRunning) return;
+      this.sim.step();
+      this.renderAll();
+    });
+    
+    // Run 10 rounds
+    document.getElementById('btnRun10').addEventListener('click', async () => {
+      if (simulationRunning) return;
+      simulationRunning = true;
+      
+      const btn = document.getElementById('btnRun10');
+      btn.classList.add('running');
+      btn.disabled = true;
+      
+      for (let i = 0; i < 10; i++) {
+        this.sim.step();
+        this.renderAll();
+        await new Promise(r => setTimeout(r, 100));
+      }
+      
+      btn.classList.remove('running');
+      btn.disabled = false;
+      simulationRunning = false;
+    });
+    
+    // Run 30 rounds
+    document.getElementById('btnRun30').addEventListener('click', async () => {
+      if (simulationRunning) return;
+      simulationRunning = true;
+      
+      const btn = document.getElementById('btnRun30');
+      btn.classList.add('running');
+      btn.disabled = true;
+      
+      for (let i = 0; i < 30; i++) {
+        this.sim.step();
+        this.renderAll();
+        await new Promise(r => setTimeout(r, 50));
+      }
+      
+      btn.classList.remove('running');
+      btn.disabled = false;
+      simulationRunning = false;
+    });
+    
+    // Reset
+    document.getElementById('btnReset').addEventListener('click', () => {
+      if (simulationRunning) return;
+      this.sim.reset();
+      this.renderAll();
+      showNotification('🔄 Simulation reset. All agents back to Stage 1.', 'info');
+    });
+    
+    // Attack simulation
+    document.getElementById('btnSimulateAttack').addEventListener('click', () => {
+      if (simulationRunning) return;
+      
+      // Jump to attack phase
+      while (this.sim.globalRound < 10) {
+        this.sim.step();
+      }
+      
+      this.renderAll();
+      showNotification('⚡ Attack simulation activated! Watch Φ responses.', 'warning');
+    });
+    
+    // Save
+    document.getElementById('btnSave').addEventListener('click', () => {
+      if (simulationRunning) return;
+      this.sim.saveToStorage();
+    });
+    
+    // Load
+    document.getElementById('btnLoad').addEventListener('click', () => {
+      if (simulationRunning) return;
+      if (this.sim.loadFromStorage()) {
+        this.renderAll();
+      }
+    });
+    
+    // Run Φ Audit - FIXED VERSION
+    document.getElementById('btnRunAudit').addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      console.log('🔍 Audit button clicked');
+      
+      try {
+        // Ensure simulation exists
+        if (!this.sim || !window.simulation) {
+          showNotification('❌ Simulation not initialized. Please refresh the page.', 'error');
+          return;
+        }
+        
+        // Run the audit
+        const results = this.sim.runAudit();
+        
+        // Show detailed results
+        results.forEach(result => {
+          if (result.graduated) {
+            showNotification(
+              `🎓 ${result.agent}: Φ = ${result.phi.toFixed(3)} → Graduated to ${result.stage}`,
+              'success',
+              5000
+            );
+          } else {
+            showNotification(
+              `⏳ ${result.agent}: Φ = ${result.phi.toFixed(3)} → Needs more evidence (${result.evidence} folds)`,
+              'info',
+              3000
+            );
+          }
+        });
+        
+        // Update the display
+        this.renderAll();
+        
+        // Visual feedback on button
+        const btn = e.target;
+        const originalHTML = btn.innerHTML;
+        const originalBg = btn.style.background;
+        const originalBorder = btn.style.borderColor;
+        
+        btn.style.background = '#10b981';
+        btn.style.borderColor = '#10b981';
+        btn.innerHTML = '✅ Audit Complete';
+        
+        setTimeout(() => {
+          btn.style.background = originalBg;
+          btn.style.borderColor = originalBorder;
+          btn.innerHTML = originalHTML;
+        }, 1500);
+        
+      } catch (error) {
+        console.error('Audit error:', error);
+        showNotification(`❌ Audit failed: ${error.message}`, 'error');
+      }
+    });
+    
+    // Prevent multiple clicks
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        if (this.disabled || simulationRunning) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      });
+    });
+  }
+}
 
-// Show initial instructions
-setTimeout(() => {
-  const welcome = document.createElement('div');
-  welcome.style.cssText = `
-    position:fixed; top:20px; left:50%; transform:translateX(-50%); 
-    background:#0f172a; color:#e6edf3; padding:16px; border-radius:12px; 
-    z-index:1000; border:2px solid #3b82f6; max-width:600px; font-size:13px;
-    box-shadow:0 8px 32px rgba(0,0,0,0.4);
-  `;
-  welcome.innerHTML = `
-    <strong>🔄 Identity Continuity Proof</strong><br>
-    • <b>Click "Run Demo" button:</b> It shows the entire proof<br>
-    • <b>Watch:</b> wA locked, wB evolves<br>
-    • <b>Identity continues</b> after refresh<br>
-    • <b>Core proof:</b> Save → Refresh → Load → Identity continues exactly<br>
-    <div style="margin-top:8px; font-size:11px; opacity:0.8;">
-      wA = immutable constraint (≥0.05) | wB = evolving identity layer
-    </div>
-  `;
-  document.body.appendChild(welcome);
-  setTimeout(() => welcome.remove(), 8000);
-}, 500);
+// ========== INITIALIZATION ==========
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize simulation
+  const simulation = new Simulation();
+  
+  // Initialize renderer with fixed controls
+  const renderer = new Renderer(simulation);
+  
+  // Make available globally for debugging
+  window.simulation = simulation;
+  window.renderer = renderer;
+  
+  // Show welcome message
+  setTimeout(() => {
+    showNotification(
+      '🎯 PSSU-SIS Φ Auditor Ready! Run simulation to watch agents graduate based on Φ values.',
+      'info',
+      5000
+    );
+  }, 1000);
+});
 </script>
 </body>
 </html>

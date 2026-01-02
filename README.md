@@ -1,3 +1,24 @@
+## Demo Mode – Isolated Sandbox
+
+This project is currently presented as a sandboxed demonstration.
+
+- Runs without API keys or credentials
+- Does not connect to external systems
+- Learning state is local and reversible
+- No production data is accessed or modified
+
+This demo exists to illustrate architecture and behavior, not deployment.
+
+## What This Is
+- A reference implementation of persistent learning behavior
+- A controlled environment for observing state evolution
+- A framework for reasoning about memory, learning, and constraints
+
+## What This Is Not
+- A production system
+- An autonomous agent acting on external systems
+- A drop-in replacement for existing AI stacks
+
 # PermaMind
 
 **Persistent Identity & Stateful Decision Architecture for AI Agents**
@@ -135,11 +156,17 @@ cd PermaMind
 
 ## Further Reading
 
+<<<<<<< HEAD
 * [Gap Framework Whitepaper](https://omegaaxiommeta.substack.com/p/the-gap-framework-pssu-manual)
 * [PermaMind Engine Technical Paper](https://omegaaxiommeta.substack.com/p/permamind-engine)
 * [Live Demo](https://bapxai.com/pssu.html)
 
 ---
+=======
+- [Gap Framework Whitepaper](https://omegaaxiommeta.substack.com/p/permamind-engine-white-paper?r=5vcnib)
+- [PermaMind Engine Technical Paper](https://omegaaxiommeta.substack.com/p/the-pssu-framework-a-new-architectural?r=5vcnib)
+- [Live Demo](https://bapxai.com/pssu.html)
+>>>>>>> d8bec7fcfc6460be7163999d66f9c366b11f9603
 
 ## Contact
 
@@ -153,7 +180,8 @@ cd PermaMind
 
 MIT — see [LICENSE](LICENSE) file
 
----
+---Future work may explore integrations, but only after safety, observability, and control boundaries are explicit.
+
 
 **Future work may explore integrations only after safety, observability, and control boundaries are explicit.**
 
