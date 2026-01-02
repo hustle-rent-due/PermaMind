@@ -1,3 +1,15 @@
+## Demo Mode – Isolated Sandbox
+
+This project is currently presented as a sandboxed demonstration.
+
+- Runs without API keys or credentials
+- Does not connect to external systems
+- Learning state is local and reversible
+- No production data is accessed or modified
+
+This demo exists to illustrate architecture and behavior, not deployment.
+
+
 # PermaMind
 
 **Persistent Identity & Stateful Decision Architecture for AI Agents**
