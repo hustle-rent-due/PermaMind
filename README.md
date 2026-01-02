@@ -9,6 +9,15 @@ This project is currently presented as a sandboxed demonstration.
 
 This demo exists to illustrate architecture and behavior, not deployment.
 
+## What This Is
+- A reference implementation of persistent learning behavior
+- A controlled environment for observing state evolution
+- A framework for reasoning about memory, learning, and constraints
+
+## What This Is Not
+- A production system
+- An autonomous agent acting on external systems
+- A drop-in replacement for existing AI stacks
 
 # PermaMind
 
@@ -109,6 +118,7 @@ cd PermaMind
 
 MIT - See [LICENSE](LICENSE) file
 
----
+---Future work may explore integrations, but only after safety, observability, and control boundaries are explicit.
+
 
 *Published November 2025. Open source implementation of persistent learning architecture.*
