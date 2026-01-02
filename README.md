@@ -83,8 +83,8 @@ cd PermaMind
 
 ## Further Reading
 
-- [Gap Framework Whitepaper](https://omegaaxiommeta.substack.com/p/the-gap-framework-pssu-manual)
-- [PermaMind Engine Technical Paper](https://omegaaxiommeta.substack.com/p/permamind-engine-white-paper)
+- [Gap Framework Whitepaper](https://omegaaxiommeta.substack.com/p/permamind-engine-white-paper?r=5vcnib)
+- [PermaMind Engine Technical Paper](https://omegaaxiommeta.substack.com/p/the-pssu-framework-a-new-architectural?r=5vcnib)
 - [Live Demo](https://bapxai.com/pssu.html)
 
 ## Contact
