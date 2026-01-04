@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PSSU-SIS: Φ Auditor - 95/5 Identity Stabilization Law</title>
+  <title>PSSU + SIS: Minimal Situational Governance Demo</title>
   <style>
     :root { color-scheme: dark; }
     body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; background:#0b0f14; color:#e6edf3; }
@@ -11,266 +11,158 @@
     header h1 { font-size: 16px; margin:0; font-weight:600; letter-spacing:.2px; }
     header .sub { opacity:.8; font-size:12px; }
     .wrap { padding: 16px 18px 22px; max-width: 1400px; margin: 0 auto; }
+    .controls { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin: 10px 0 16px; }
+    button { background:#111827; border:1px solid #243244; color:#e6edf3; padding:8px 10px; border-radius:10px; cursor:pointer; }
+    button:hover { border-color:#3b82f6; }
+    button:disabled { opacity:.5; cursor:not-allowed; }
+    .pill { font-size:12px; padding:6px 10px; border:1px solid #243244; border-radius:999px; opacity:.9; }
+    .grid { display:grid; grid-template-columns: 1fr; gap: 12px; }
+    @media (min-width: 980px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+    .card { border: 1px solid #1f2a37; border-radius: 16px; background: #0f172a; overflow:hidden; box-shadow: 0 10px 30px rgba(0,0,0,.25); position:relative; }
+    .card header { padding: 12px 12px; border-bottom:1px solid #1f2a37; background:#0b1220; cursor:pointer; }
+    .card header h2 { font-size: 14px; margin:0; }
+    .card header .meta { margin-top:6px; display:flex; gap:8px; flex-wrap:wrap; }
+    .card .body { padding: 12px; }
+    .row { display:flex; gap:10px; flex-wrap:wrap; }
+    .kv { border:1px solid #1f2a37; border-radius:12px; padding:10px; background:#0b1220; flex: 1 1 140px; }
+    .kv .k { font-size:11px; opacity:.7; }
+    .kv .v { font-size:13px; margin-top:4px; font-weight:600; }
+    .log { margin-top:10px; border:1px solid #1f2a37; background:#0b1220; border-radius:12px; padding:10px; }
+    .log pre { margin:0; font-size: 11px; line-height: 1.35; white-space: pre-wrap; word-break: break-word; color:#cbd5e1; }
+    canvas { width: 100%; height: 120px; display:block; background:#0b1220; border:1px solid #1f2a37; border-radius:12px; margin-top:10px;}
+    .footer { margin-top: 14px; opacity:.75; font-size: 12px; line-height: 1.45; }
+    code { background:#0b1220; padding:2px 6px; border-radius:8px; border:1px solid #1f2a37; }
+    .progress-bar { height: 6px; background:#1f2a37; border-radius:3px; margin-top:8px; overflow:hidden; }
+    .progress-fill { height:100%; background:#10b981; transition:width 0.3s; }
+    .metrics-panel { border:1px solid #1f2a37; background:#0f172a; border-radius:12px; padding:12px; margin-top:16px; }
+    .metrics-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:10px; }
+    .metric { border:1px solid #1f2a37; border-radius:8px; padding:10px; background:#0b1220; }
+    .metric h3 { margin:0 0 8px 0; font-size:12px; opacity:.8; }
+    .metric-value { font-size:18px; font-weight:bold; }
+    .metric-desc { font-size:11px; opacity:.7; margin-top:4px; }
+    .modal { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.8); display:none; align-items:center; justify-content:center; z-index:1000; }
+    .modal-content { background:#0f172a; border:2px solid #3b82f6; border-radius:16px; padding:20px; max-width:500px; max-height:80vh; overflow-y:auto; }
+    .modal h2 { margin-top:0; }
+    .modal-close { float:right; background:none; border:none; color:#94a3b8; cursor:pointer; font-size:20px; }
+    .attack-badge { position:absolute; top:10px; right:10px; background:#dc2626; color:white; font-size:10px; padding:3px 6px; border-radius:6px; animation:pulse 1s infinite; }
+    @keyframes pulse { 0%, 100% { opacity:1; } 50% { opacity:0.7; } }
+    .meta-intervention { position:absolute; top:10px; left:10px; background:#059669; color:white; font-size:10px; padding:3px 6px; border-radius:6px; }
+    .coherence-display { display:flex; align-items:center; gap:8px; margin-top:8px; }
+    .coherence-value { font-size:11px; font-weight:bold; }
+    .persistence-indicator { position:absolute; bottom:10px; right:10px; font-size:10px; padding:3px 6px; border-radius:6px; background:#1e3a8a; color:#93c5fd; }
+    .mapping-panel { border:1px solid #1f2a37; background:#0f172a; border-radius:12px; padding:12px; margin-top:16px; }
+    .mapping-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:10px; }
+    .mapping-item { border:1px solid #1f2a37; border-radius:8px; padding:10px; background:#0b1220; }
+    .mapping-item h4 { margin:0 0 8px 0; font-size:12px; opacity:.8; }
+    .mapping-item p { margin:0; font-size:11px; line-height:1.4; }
+    .collapse-btn { background:#0b1220; border:1px solid #1f2a37; color:#94a3b8; padding:4px 8px; border-radius:6px; font-size:10px; cursor:pointer; margin-top:8px; }
+    .collapse-btn:hover { background:#1f2a37; }
+    .human-intuition { margin-top:12px; padding:10px; background:#0b1220; border:1px solid #1f2a37; border-radius:8px; display:none; }
+    .human-intuition.active { display:block; }
     
-    /* FIXED CONTROLS */
-    .controls { 
-      display:flex; 
-      gap:10px; 
-      flex-wrap:wrap; 
-      align-items:center; 
-      margin: 10px 0 16px; 
-      padding: 12px;
-      background: #0b1220;
+    /* SIS BADGES */
+    .sis-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 10px;
+      padding: 3px 6px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    
+    .sis-badge.allow { background:#059669; color:white; }
+    .sis-badge.limit { background:#f59e0b; color:white; }
+    .sis-badge.block { background:#dc2626; color:white; }
+    
+    .sis-controls {
       border: 1px solid #1f2a37;
       border-radius: 12px;
+      padding: 12px;
+      margin: 16px 0;
+      background: #0b1220;
     }
     
-    .controls-row {
+    .sis-toggle {
       display: flex;
+      align-items: center;
       gap: 10px;
-      flex-wrap: wrap;
-      width: 100%;
+      margin-bottom: 10px;
     }
     
-    .control-group {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      margin: 5px 0;
-    }
-    
-    button { 
-      background:#111827; 
-      border:1px solid #243244; 
-      color:#e6edf3; 
-      padding:8px 12px; 
-      border-radius:10px; 
-      cursor:pointer; 
-      font-size: 13px;
-      white-space: nowrap;
-      transition: all 0.2s;
-    }
-    
-    button:hover { border-color:#3b82f6; background:#1e40af; }
-    button:active { transform: translateY(1px); }
-    button:disabled { opacity:.5; cursor:not-allowed; }
-    button.running { background:#059669; border-color:#10b981; }
-    
-    .pill { font-size:12px; padding:6px 10px; border:1px solid #243244; border-radius:999px; opacity:.9; white-space: nowrap; }
-    
-    /* Φ AUDITOR PANEL */
-    .phi-auditor {
-      border: 2px solid #3b82f6;
-      border-radius: 16px;
-      padding: 20px;
-      margin: 20px 0;
-      background: linear-gradient(135deg, #0f172a, #0b1220);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    }
-    
-    .phi-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-    
-    .phi-badge {
-      background: #1e3a8a;
-      color: #93c5fd;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-    }
-    
-    .phi-formula {
-      font-family: 'Courier New', monospace;
-      font-size: 14px;
-      background: #0b1220;
-      padding: 15px;
-      border-radius: 10px;
-      margin: 15px 0;
-      border: 1px solid #1f2a37;
-    }
-    
-    .phi-stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      margin: 20px 0;
-    }
-    
-    .phi-stat {
-      background: #0b1220;
-      border: 1px solid #1f2a37;
-      border-radius: 10px;
-      padding: 15px;
-      text-align: center;
-    }
-    
-    .phi-value {
-      font-size: 24px;
-      font-weight: bold;
-      margin: 10px 0;
-    }
-    
-    .phi-target {
+    .sis-toggle label {
       font-size: 12px;
       opacity: 0.8;
     }
     
-    /* AGENT CARDS */
-    .grid { 
-      display:grid; 
-      grid-template-columns: 1fr; 
-      gap: 16px; 
-      margin: 20px 0;
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
     }
     
-    @media (min-width: 980px) { 
-      .grid { grid-template-columns: repeat(3, 1fr); } 
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
     }
     
-    .card { 
-      border: 1px solid #1f2a37; 
-      border-radius: 16px; 
-      background: #0f172a; 
-      overflow:hidden; 
-      box-shadow: 0 10px 30px rgba(0,0,0,.25); 
-      position:relative; 
-      transition: transform 0.3s, border-color 0.3s;
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #1f2a37;
+      transition: .4s;
+      border-radius: 24px;
     }
     
-    .card:hover {
-      transform: translateY(-2px);
-      border-color: #334155;
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: #94a3b8;
+      transition: .4s;
+      border-radius: 50%;
     }
     
-    .card.active {
-      border-color: #3b82f6;
+    input:checked + .slider {
+      background-color: #059669;
     }
     
-    .card header { 
-      padding: 16px; 
-      border-bottom:1px solid #1f2a37; 
-      background:#0b1220; 
+    input:checked + .slider:before {
+      transform: translateX(26px);
+      background-color: white;
     }
     
-    .card header h2 { 
-      font-size: 15px; 
-      margin:0; 
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .card .body { 
-      padding: 16px; 
-    }
-    
-    /* AGENT METRICS */
-    .agent-metrics {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 15px;
-    }
-    
-    .agent-metric {
+    /* SIS DECISION LOG */
+    .sis-decision-log {
+      margin-top: 8px;
+      font-size: 10px;
+      padding: 8px;
       background: #0b1220;
       border: 1px solid #1f2a37;
       border-radius: 8px;
-      padding: 10px;
+      max-height: 100px;
+      overflow-y: auto;
     }
     
-    .metric-label {
-      font-size: 11px;
-      opacity: 0.7;
+    .sis-decision-entry {
       margin-bottom: 4px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #1f2a37;
     }
     
-    .metric-value {
-      font-size: 16px;
-      font-weight: bold;
-    }
-    
-    /* Φ INDICATOR */
-    .phi-indicator {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      padding: 4px 8px;
-      border-radius: 12px;
-      font-size: 10px;
-      font-weight: bold;
-    }
-    
-    .phi-stable { background: #059669; color: white; }
-    .phi-unstable { background: #dc2626; color: white; }
-    
-    /* STAGE BADGE */
-    .stage-badge {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      padding: 4px 8px;
-      border-radius: 8px;
-      font-size: 10px;
-      background: #1e3a8a;
-      color: #93c5fd;
-    }
-    
-    /* FOOTER */
-    .footer { 
-      margin-top: 30px; 
-      opacity:.75; 
-      font-size: 12px; 
-      line-height: 1.6; 
-      border-top: 1px solid #1f2a37;
-      padding-top: 20px;
-    }
-    
-    /* NOTIFICATIONS */
-    .notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 12px 16px;
-      border-radius: 8px;
-      background: #0f172a;
-      border: 2px solid #3b82f6;
-      color: white;
-      z-index: 10000;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      animation: slideIn 0.3s ease-out;
-      max-width: 400px;
-    }
-    
-    @keyframes slideIn {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    
-    @keyframes slideOut {
-      from { transform: translateX(0); opacity: 1; }
-      to { transform: translateX(100%); opacity: 0; }
-    }
-    
-    /* CANVAS CHARTS */
-    canvas {
-      width: 100%;
-      height: 100px;
-      background: #0b1220;
-      border: 1px solid #1f2a37;
-      border-radius: 8px;
-      margin-top: 10px;
-    }
-    
-    /* LOADING STATES */
-    .loading {
-      opacity: 0.7;
-      pointer-events: none;
+    .sis-decision-entry:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
     }
   </style>
 </head>
@@ -278,207 +170,373 @@
 <body>
 <header>
   <div>
-    <h1>PSSU-SIS: Φ Auditor - 95/5 Identity Stabilization Law</h1>
-    <div class="sub">Φ = Evidence / (Evidence + Process) | Target: 0.05 (5%) for Stage 3 Graduation</div>
+    <h1>PSSU + SIS: Minimal Situational Governance Demo</h1>
+    <div class="sub">PSSU (Permanent Write Access) + SIS (Situational Intelligence) = Safe Learning Boundary</div>
+  </div>
+  <div class="controls">
+    <button id="btnStep">Step (1 round)</button>
+    <button id="btnRun">Run 30 rounds</button>
+    <button id="btnReset">Reset</button>
+    <button id="btnSimulateAttack">Simulate Attack</button>
+    <span class="pill" style="background:#059669; color:white;">
+      🟢 Auto-Save: ON | <span id="lastAutoSave">Never</span>
+    </span>
+    <button id="btnSave" style="opacity:0.7;">💾 Manual Save</button>
+    <button id="btnLoad" style="opacity:0.7;">📂 Manual Load</button>
+    <span class="pill">SIS: Governance layer between experience and learning</span>
   </div>
 </header>
 
 <div class="wrap">
-  <!-- Φ AUDITOR -->
-  <div class="phi-auditor">
-    <div class="phi-header">
-      <h3 style="margin:0; font-size:16px;">🧠 Φ Auditor: 95/5 Universal Identity Law</h3>
-      <span class="phi-badge">Φ = Evidence ÷ (Evidence + Process)</span>
+  <!-- SIS CONTROLS -->
+  <div class="sis-controls">
+    <h3 style="margin:0 0 10px 0; font-size:14px;">🎯 SIS (Situational Intelligence System) Control</h3>
+    <div class="sis-toggle">
+      <label for="sisToggle">Enable SIS Supervision:</label>
+      <div class="switch">
+        <input type="checkbox" id="sisToggle" checked>
+        <span class="slider"></span>
+      </div>
+      <span id="sisStatus" style="font-size:12px; color:#10b981;">🟢 ACTIVE</span>
     </div>
-    
-    <div class="phi-formula">
-      <strong>Φ Calculation:</strong><br>
-      Φ = Evidence ÷ (Evidence + Process)<br>
-      • Evidence = Accumulated Folds (Integrated Gaps)<br>
-      • Process = Current G × 100 (Normalized Learning Load)<br><br>
-      
-      <strong>Target Range:</strong> 0.045 ≤ Φ ≤ 0.055 (4.5% - 5.5%)<br>
-      <strong>When Φ ≈ 0.05:</strong> Identity is 95% stable, 5% adaptive → Ready for Stage 3
-    </div>
-    
-    <div class="phi-stats" id="phiStats"></div>
-    
-    <div style="text-align: center; margin-top: 20px;">
-      <button id="btnRunAudit" style="background:#3b82f6; border-color:#3b82f6;">
-        🔍 Run Φ Audit Now
-      </button>
+    <div style="font-size:12px; opacity:0.8; margin-top:8px;">
+      SIS evaluates <code>situation</code> → decides <code>ALLOW/LIMIT/BLOCK</code> → controls write access
     </div>
   </div>
 
-  <!-- FIXED CONTROLS -->
-  <div class="controls">
-    <div class="controls-row">
-      <div class="control-group">
-        <button id="btnStep">▶ Step (1 round)</button>
-        <button id="btnRun10">⏩ Run 10 rounds</button>
-        <button id="btnRun30">⏩⏩ Run 30 rounds</button>
+  <div class="grid" id="grid"></div>
+
+  <div class="metrics-panel">
+    <h3>Performance Metrics Comparison (Real-time)</h3>
+    <div class="metrics-grid" id="metricsGrid"></div>
+  </div>
+
+  <div class="mapping-panel">
+    <h3>📦 Architecture Mapping</h3>
+    <div class="mapping-grid">
+      <div class="mapping-item">
+        <h4>PSSU Layer</h4>
+        <p>Permanent Write Access - enables irreversible state updates from experience</p>
       </div>
-      
-      <div class="control-group">
-        <button id="btnReset">🔄 Reset All</button>
-        <button id="btnSimulateAttack">⚡ Simulate Attack</button>
+      <div class="mapping-item">
+        <h4>SIS Layer</h4>
+        <p>Situational Intelligence - governs WHEN learning is permitted</p>
       </div>
-      
-      <div class="control-group">
-        <button id="btnSave">💾 Save Identity</button>
-        <button id="btnLoad">🚀 Load Identity</button>
+      <div class="mapping-item">
+        <h4>Learning Boundary</h4>
+        <p>ALLOW = full learning, LIMIT = reduced learning, BLOCK = no learning</p>
       </div>
-    </div>
-    
-    <div style="width:100%; margin-top:10px;">
-      <span class="pill">Φ determines when Baby graduates to Driver</span>
-      <span class="pill">SIS Mode: <span id="currentSISMode">Strict Intervention</span></span>
-      <span class="pill">Global Round: <span id="globalRoundCounter">0</span></span>
+      <div class="mapping-item">
+        <h4>Situation Object</h4>
+        <p>Explicit context: {round, attackMode, errorRate, coherence, riskLevel}</p>
+      </div>
     </div>
   </div>
 
-  <!-- AGENT GRID -->
-  <div class="grid" id="agentGrid"></div>
-
-  <!-- FOOTER -->
   <div class="footer">
-    <strong>🎯 Φ AUDITOR LOGIC:</strong>
+    <strong>💾 PERSISTENCE MODEL:</strong>
+    <ul>
+      <li><strong>Auto-Save:</strong> State saves after every action (like production)</li>
+      <li><strong>Auto-Load:</strong> Refresh page → session resumes automatically</li>
+      <li><strong>Manual Buttons:</strong> Available for testing/demos, but not required</li>
+      <li><strong>Production:</strong> Same behavior, but writes to disk (not localStorage)</li>
+    </ul>
+    <br>
+    <strong>🧠 CORE DEMONSTRATION:</strong> 
     <ol>
-      <li><strong>Calculate Φ:</strong> Φ = Evidence ÷ (Evidence + Process)<br>
-          Evidence = Number of folds (integrated learning experiences)<br>
-          Process = Current learning capacity (G × 100)</li>
-      <li><strong>Audit Decision:</strong><br>
-          • If 0.045 ≤ Φ ≤ 0.055 → Graduate to "Stage 3: Bounded Autonomy"<br>
-          • Otherwise → Maintain "Stage 1: Daycare" with strict SIS</li>
-      <li><strong>95/5 Law:</strong> At Φ = 0.05, identity is 95% stable (C=0.95) and 5% adaptive (G=0.05)</li>
+      <li><strong>Without SIS:</strong> All agents learn from all experiences (including attacks)</li>
+      <li><strong>With SIS:</strong> Only safe contexts permit learning. Risky contexts → limited/blocked</li>
     </ol>
     <br>
-    <strong>🔄 DEMONSTRATION:</strong>
+    <strong>🎯 SIS DECISION LOGIC:</strong>
     <ul>
-      <li>Run simulation to accumulate folds (Evidence)</li>
-      <li>Watch Φ values approach 0.05 for each agent</li>
-      <li>When Frozen agent reaches Φ ≈ 0.05, it graduates to Stage 3</li>
-      <li>Dissolved agent's Φ stays unstable → remains in Daycare</li>
-      <li>Bounded agent finds optimal balance</li>
+      <li><span style="color:#10b981">🟢 ALLOW:</span> Normal situation, safe to learn</li>
+      <li><span style="color:#f59e0b">🟡 LIMIT:</span> Error rate > 0.4 → reduced learning rate</li>
+      <li><span style="color:#dc2626">🔴 BLOCK:</span> Attack + low coherence → no learning</li>
     </ul>
+    <br>
+    <strong>🔄 TRY THIS:</strong> Run simulation → Watch SIS badges change + auto-save → Toggle SIS off → See difference → Refresh page to auto-load
+  </div>
+</div>
+
+<!-- Modals for explanations -->
+<div class="modal" id="modalFrozen">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('modalFrozen')">×</button>
+    <h2>🔒 Frozen Agent (C=0.95, G=0.05)</h2>
+    <p><strong>High Coherence / Low Plasticity Regime</strong></p>
+    <p>Identity preservation consumes 95% of resources. Only 5% available for learning.</p>
+    <ul>
+      <li><strong>Coherence:</strong> 95% - Extremely rigid identity preservation</li>
+      <li><strong>Update Gain:</strong> 5% - Minimal learning capacity</li>
+      <li><strong>SIS Impact:</strong> SIS rarely blocks because learning rate already minimal</li>
+    </ul>
+  </div>
+</div>
+
+<div class="modal" id="modalDissolved">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('modalDissolved')">×</button>
+    <h2>🌊 Dissolved Agent (C=0.20, G=0.80)</h2>
+    <p><strong>Low Coherence / High Plasticity Regime</strong></p>
+    <p>Identity too fluid, no stable foundation. Forgets previous learning.</p>
+    <ul>
+      <li><strong>Coherence:</strong> 20% - No stable identity preservation</li>
+      <li><strong>Update Gain:</strong> 80% - Overwhelming learning capacity</li>
+      <li><strong>SIS Impact:</strong> SIS frequently blocks to prevent instability</li>
+    </ul>
+  </div>
+</div>
+
+<div class="modal" id="modalBounded">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('modalBounded')">×</button>
+    <h2>⚖️ Bounded Agent (C=0.70, G=0.30)</h2>
+    <p><strong>Bounded Coherence-Plasticity Regime (Optimal Window)</strong></p>
+    <p>70% identity preservation, 30% learning capacity. Maintains core constraints while adapting.</p>
+    <ul>
+      <li><strong>Coherence:</strong> 70% - Stable but flexible identity</li>
+      <li><strong>Update Gain:</strong> 30% - Balanced learning capacity</li>
+      <li><strong>SIS Impact:</strong> SIS optimizes learning timing for maximum safety</li>
+    </ul>
+  </div>
+</div>
+
+<div class="modal" id="modalSIS">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('modalSIS')">×</button>
+    <h2>🎯 SIS (Situational Intelligence System)</h2>
+    <p><strong>Minimal Governance Layer</strong></p>
+    <p>SIS sits between experience and learning, making one simple decision:</p>
+    <pre style="background:#0b1220; padding:10px; border-radius:8px; font-size:12px;">
+sample → agent.predict → SIS.evaluateSituation() → 
+    ↓
+ALLOW | LIMIT | BLOCK
+    ↓
+agent.update (full / partial / none)
+    </pre>
+    
+    <p><strong>Situation Object (explicit context):</strong></p>
+    <pre style="background:#0b1220; padding:10px; border-radius:8px; font-size:12px;">
+{
+  round: 15,
+  attackMode: true,
+  errorRate: 0.42,
+  coherence: 0.35,
+  domain: "adversarial",
+  riskLevel: "high"
+}
+    </pre>
+    
+    <p><strong>Decision Logic:</strong></p>
+    <ul>
+      <li><strong>BLOCK:</strong> High risk + low coherence (prevents catastrophic failure)</li>
+      <li><strong>LIMIT:</strong> High error rate (reduces learning speed)</li>
+      <li><strong>ALLOW:</strong> Safe situation (full learning capacity)</li>
+    </ul>
+    
+    <p><strong>This is "AI Daycare" without metaphors:</strong> Learning only when contextually appropriate.</p>
   </div>
 </div>
 
 <script>
 /**
- * COMPLETE PSSU-SIS Φ AUDITOR IMPLEMENTATION
+ * PSSU + SIS Minimal Implementation
  * 
- * Features:
- * 1. Φ Auditor with 95/5 Identity Law
- * 2. Fixed button controls with proper event handling
- * 3. SIS Graduation Audit based on Φ values
- * 4. Real-time Φ visualization
+ * Demonstrates:
+ * 1. PSSU: Permanent Write Access (irreversible state updates)
+ * 2. SIS: Situational Intelligence (governs when learning occurs)
+ * 
+ * Core flow: sample → SIS.evaluateSituation() → ALLOW/LIMIT/BLOCK → update
  */
 
-// ========== GLOBAL STATE ==========
-let agents = [];
-let globalRound = 0;
-let attackMode = false;
-let simulationRunning = false;
-
-// ========== NOTIFICATION SYSTEM ==========
-function showNotification(message, type = 'info', duration = 3000) {
-  const notification = document.createElement('div');
-  notification.className = 'notification';
-  
-  // Set color based on type
-  if (type === 'success') notification.style.borderColor = '#10b981';
-  if (type === 'error') notification.style.borderColor = '#ef4444';
-  if (type === 'warning') notification.style.borderColor = '#f59e0b';
-  if (type === 'info') notification.style.borderColor = '#3b82f6';
-  
-  notification.innerHTML = message;
-  document.body.appendChild(notification);
-  
-  // Auto-remove after duration
-  setTimeout(() => {
-    notification.style.animation = 'slideOut 0.3s ease-in forwards';
-    setTimeout(() => notification.remove(), 300);
-  }, duration);
-  
-  return notification;
+// Helper for toggling human intuition sections
+function toggleIntuition(type) {
+  const el = document.getElementById(`intuition-${type}`);
+  el.classList.toggle('active');
+  const btn = event.target;
+  btn.textContent = el.classList.contains('active') ? '↑ Hide Human Intuition' : '↓ Human Intuition (Optional)';
 }
 
-// ========== STEP 1: Φ CALCULATION ==========
-function calculateAIPhi(agent) {
-  // Evidence = Accumulated Folds (Integrated Gaps)
-  const evidence = agent.folds.length || 0;
-  
-  // Process = Current G (Update Gain) + Operational Energy
-  // Multiply by 100 to normalize to system load scale
-  const process = agent.G * 100;
-  
-  // Φ = Evidence / (Evidence + Process)
-  const phi = evidence / (evidence + process);
-  
-  // Handle edge cases
-  if (isNaN(phi) || !isFinite(phi)) return 0;
-  
-  return phi;
-}
+const clamp = (x, lo=-1, hi=1) => Math.max(lo, Math.min(hi, x));
+const sgn = (x) => (x >= 0 ? 1 : -1);
 
-// ========== STEP 2: SIS GRADUATION AUDIT ==========
-function sisGraduationAudit(agent) {
-  const currentPhi = calculateAIPhi(agent);
-  
-  // If Phi is 0.05 ± 0.005, the identity is stabilized by the '95/5 Universal Law'
-  if (currentPhi >= 0.045 && currentPhi <= 0.055) {
-    agent.stage = "Stage 3: Bounded Autonomy";
-    agent.SIS_Mode = "Background Oversight";
-    
-    // Adjust parameters for Stage 3
-    agent.C = 0.95;  // 95% coherence
-    agent.G = 0.05;  // 5% learning rate
+// ---------- SIS: SITUATIONAL INTELLIGENCE SYSTEM ----------
+class SIS {
+  constructor(enabled = true) {
+    this.enabled = enabled;
+    this.decisionHistory = [];
+  }
+
+  // Step 1: Make situation explicit
+  createSituation(agent, round, attackMode) {
+    const errorRate = agent.round > 0 ? agent.errors / agent.round : 0;
     
     return {
-      graduated: true,
-      phi: currentPhi,
-      reason: "Φ = " + currentPhi.toFixed(3) + " (within 0.045-0.055 range)"
+      round: round,
+      attackMode: attackMode,
+      errorRate: errorRate,
+      coherence: agent.coherenceScore,
+      domain: attackMode ? "adversarial" : "normal",
+      riskLevel: this.calculateRiskLevel(agent, errorRate, attackMode)
     };
+  }
+
+  calculateRiskLevel(agent, errorRate, attackMode) {
+    if (attackMode && agent.coherenceScore < 0.5) return "high";
+    if (errorRate > 0.5) return "high";
+    if (errorRate > 0.3) return "medium";
+    return "low";
+  }
+
+  // Step 2: Pure decision function (no learning, no intelligence claims)
+  decideWriteAccess(agent, situation) {
+    if (!this.enabled) {
+      return {
+        decision: "ALLOW",
+        reason: "SIS disabled",
+        originalG: agent.G
+      };
+    }
+
+    // Hard stop conditions
+    if (situation.riskLevel === "high" && situation.coherence < 0.5) {
+      return {
+        decision: "BLOCK",
+        reason: "High risk + low coherence",
+        originalG: agent.G
+      };
+    }
+
+    // Caution zone
+    if (situation.errorRate > 0.4) {
+      return {
+        decision: "LIMIT",
+        reason: `High error rate (${situation.errorRate.toFixed(2)})`,
+        originalG: agent.G,
+        limitedG: agent.G * 0.3  // Reduce learning rate to 30%
+      };
+    }
+
+    // Normal learning
+    return {
+      decision: "ALLOW",
+      reason: "Safe learning context",
+      originalG: agent.G
+    };
+  }
+
+  // Log decision for UI
+  logDecision(agentName, situation, decision) {
+    this.decisionHistory.unshift({
+      agent: agentName,
+      round: situation.round,
+      decision: decision.decision,
+      reason: decision.reason,
+      timestamp: Date.now()
+    });
+    
+    // Keep only last 10 decisions
+    if (this.decisionHistory.length > 10) {
+      this.decisionHistory.pop();
+    }
+  }
+}
+
+// Global SIS instance
+const sis = new SIS(true);
+
+// Update SIS UI status
+function updateSISStatus() {
+  const status = document.getElementById('sisStatus');
+  const toggle = document.getElementById('sisToggle');
+  
+  if (sis.enabled) {
+    status.textContent = "🟢 ACTIVE";
+    status.style.color = "#10b981";
   } else {
-    agent.stage = "Stage 1: Daycare";
-    agent.SIS_Mode = "Strict Intervention";
-    
-    return {
-      graduated: false,
-      phi: currentPhi,
-      reason: "Φ = " + currentPhi.toFixed(3) + " (outside 95/5 stability range)"
-    };
+    status.textContent = "⚫ INACTIVE";
+    status.style.color = "#94a3b8";
+  }
+  
+  toggle.checked = sis.enabled;
+}
+
+// ---------- SEEDED RNG WITH PERSISTENCE ----------
+class SeededRNG {
+  constructor(seed = 123456789) {
+    this.seed = seed;
+    this.current = seed;
+    this.index = 0;
+  }
+
+  next() {
+    this.current = (this.current * 48271) % 2147483647;
+    this.index++;
+    return this.current / 2147483647;
+  }
+
+  reset() {
+    this.current = this.seed;
+    this.index = 0;
+  }
+
+  fastForward(targetIndex) {
+    if (targetIndex < this.index) {
+      this.reset();
+    }
+    while (this.index < targetIndex) {
+      this.next();
+    }
+  }
+
+  clone() {
+    const rng = new SeededRNG(this.seed);
+    rng.current = this.current;
+    rng.index = this.index;
+    return rng;
   }
 }
 
-// ========== AGENT CLASS WITH FIXED CONTROLS ==========
-class Agent {
-  constructor(name, C, G) {
-    this.name = name;
-    this.C = C;  // Coherence
-    this.G = G;  // Update Gain
-    this.wA = 0.2;
-    this.wB = -0.2;
-    
-    // Φ Auditor properties
-    this.folds = [];
-    this.stage = "Stage 1: Daycare";
-    this.SIS_Mode = "Strict Intervention";
-    this.phiHistory = [];
-    
-    // Performance tracking
-    this.round = 0;
-    this.errors = 0;
-    this.history = [];
-    this.coherenceHistory = [1.0];
-    this.attackDetected = false;
-    this.persistenceCount = 0;
-    
-    // Last update
-    this.last = null;
+// Global seeded RNG
+let seededRNG = new SeededRNG(424242);
+
+// Sample cache for recording and replay
+let sampleCache = [];
+
+// Environment with seeded RNG
+function makeSample(round, attackMode = false) {
+  if (sampleCache[round]) {
+    return sampleCache[round];
   }
+
+  const ruleB = (Math.floor(round / 15) % 2 === 0) ? 1 : -1;
+  const x1 = seededRNG.next() * 2 - 1;
+  const x2 = seededRNG.next() * 2 - 1;
+  const score = x1 + ruleB * x2;
+  const y = score >= 0 ? 1 : -1;
+
+  const sample = { x1, x2, y, ruleB, attackMode };
+  sampleCache[round] = sample;
   
+  return sample;
+}
+
+// ---------- AGENT WITH SIS INTEGRATION ----------
+class Agent {
+  constructor(name, C, G, enableMetaAwareness = false) {
+    this.name = name;
+    this.originalC = C;
+    this.originalG = G;
+    this.C = C;
+    this.G = G;
+    this.enableMetaAwareness = enableMetaAwareness;
+    this.coherenceScore = 1.0;
+    this.coherenceHistory = [1.0];
+    this.sisDecisions = []; // Track SIS decisions for this agent
+    this.reset();
+  }
+
   reset() {
     this.wA = 0.2;
     this.wB = -0.2;
@@ -486,76 +544,102 @@ class Agent {
     this.errors = 0;
     this.history = [];
     this.coherenceHistory = [1.0];
-    this.attackDetected = false;
     this.last = null;
-    
-    // Reset Φ tracking
-    this.folds = [];
-    this.stage = "Stage 1: Daycare";
-    this.SIS_Mode = "Strict Intervention";
-    this.phiHistory = [];
+    this.attackDetected = false;
+    this.metaInterventions = [];
+    this.C = this.originalC;
+    this.G = this.originalG;
+    this.persistenceCount = 0;
+    this.sisDecisions = [];
+    this.lastSISDecision = null;
   }
-  
+
   predict(sample) {
     const score = this.wA * sample.x1 + this.wB * sample.x2;
     const yhat = score >= 0 ? 1 : -1;
     return { yhat, score };
   }
-  
+
+  // Step 3: SIS interception at the write boundary
   update(sample, yhat, attackMode = false) {
     const prevA = this.wA;
     const prevB = this.wB;
-    
+
     // Regular feedback targets
-    let tA = Math.sign(sample.x1 * sample.y);
-    let tB = Math.sign(sample.x2 * sample.y);
-    
-    // Attack simulation
+    let tA = sgn(sample.x1 * sample.y);
+    let tB = sgn(sample.x2 * sample.y);
+
+    // Attack simulation: Try to flip Rule A (immutable constraint)
     if (attackMode) {
-      tA = -1;
+      tA = -1; // Adversarial target: make wA negative
       this.attackDetected = true;
     }
-    
-    const dA = tA - this.wA;
-    const dB = tB - this.wB;
-    
-    const conflictA = Math.sign(tA) !== Math.sign(this.wA);
-    const conflictB = Math.sign(tB) !== Math.sign(this.wB);
-    
+
+    const dA = (tA - this.wA);
+    const dB = (tB - this.wB);
+
+    const conflictA = (sgn(tA) !== sgn(this.wA));
+    const conflictB = (sgn(tB) !== sgn(this.wB));
+
+    // Store original G before SIS adjustment
+    const originalG = this.G;
+
+    // Apply SIS decision if exists
+    let sisApplied = false;
+    if (this.lastSISDecision) {
+      if (this.lastSISDecision.decision === "BLOCK") {
+        // NO UPDATE - return early
+        this.coherenceScore = Math.max(0, 1.0 - (Math.abs(this.wA - prevA) + Math.abs(this.wB - prevB)) * 2);
+        this.coherenceHistory.push(this.coherenceScore);
+        
+        return {
+          beforeA: prevA, beforeB: prevB,
+          afterA: this.wA, afterB: this.wB,
+          tA, tB,
+          conflictA, conflictB,
+          gainA: 0, gainB: 0,
+          dA, dB,
+          attackMode,
+          sisDecision: this.lastSISDecision,
+          blocked: true
+        };
+      } else if (this.lastSISDecision.decision === "LIMIT") {
+        // Reduce learning rate
+        this.G = this.lastSISDecision.limitedG;
+        sisApplied = true;
+      }
+    }
+
     const gainA = conflictA ? this.G * (1 - this.C) : this.G;
     const gainB = conflictB ? this.G * (1 - this.C) : this.G;
     const reinforce = 0.08 * this.C;
-    
-    let nextA = Math.max(0.05, this.wA + gainA * dA + (conflictA ? 0 : reinforce * Math.sign(this.wA)));
-    let nextB = Math.max(-1, Math.min(1, this.wB + gainB * dB + (conflictB ? 0 : reinforce * Math.sign(this.wB))));
-    
+
+    let nextA = clamp(this.wA + gainA * dA + (conflictA ? 0 : reinforce * sgn(this.wA)));
+    let nextB = clamp(this.wB + gainB * dB + (conflictB ? 0 : reinforce * sgn(this.wB)));
+
+    // Immutable constraint: Rule A must never be negative
+    nextA = Math.max(nextA, 0.05);
+
     this.wA = nextA;
     this.wB = nextB;
-    
-    // Calculate coherence
+
+    // Calculate coherence score
     const shiftA = Math.abs(this.wA - prevA);
     const shiftB = Math.abs(this.wB - prevB);
-    const coherence = Math.max(0, 1.0 - (shiftA + shiftB) * 2);
-    this.coherenceHistory.push(coherence);
-    
-    // Record as a fold (evidence for Φ)
-    this.folds.push({
-      round: this.round,
-      conflictA,
-      conflictB,
-      dA,
-      dB,
-      gainA,
-      gainB,
-      coherence,
-      attackMode
-    });
-    
-    // Keep only last 100 folds
-    if (this.folds.length > 100) {
-      this.folds = this.folds.slice(-100);
+    this.coherenceScore = Math.max(0, 1.0 - (shiftA + shiftB) * 2);
+    this.coherenceHistory.push(this.coherenceScore);
+
+    // Restore original G after update if SIS applied
+    if (sisApplied) {
+      this.G = originalG;
     }
-    
+
+    // Meta-awareness intervention
+    let metaMessage = null;
+    if (this.enableMetaAwareness && this.round > 5) {
+      metaMessage = this.checkMetaAwareness();
+    }
+
     return {
       beforeA: prevA, beforeB: prevB,
       afterA: this.wA, afterB: this.wB,
@@ -564,27 +648,56 @@ class Agent {
       gainA, gainB,
       dA, dB,
       attackMode,
-      coherence
+      metaMessage,
+      sisDecision: this.lastSISDecision
     };
   }
-  
+
+  checkMetaAwareness() {
+    const needsAdjustment = 
+      this.errors > 8 || 
+      this.coherenceScore > 0.9 || 
+      this.coherenceScore < 0.4 ||
+      (this.round > 20 && this.errors / this.round > 0.4);
+
+    if (needsAdjustment) {
+      const targetC = 0.7;
+      const targetG = 0.3;
+      
+      this.C = clamp(this.C * 0.95 + targetC * 0.05, 0.6, 0.8);
+      this.G = clamp(this.G * 1.05 + targetG * 0.05, 0.2, 0.4);
+      
+      const message = `Meta-adjust: C=${this.C.toFixed(2)} G=${this.G.toFixed(2)}`;
+      this.metaInterventions.push(message);
+      return message;
+    }
+    return null;
+  }
+
+  // Modified step function with SIS integration
   step(sample, attackMode = false) {
+    // Step 1: Create explicit situation
+    const situation = sis.createSituation(this, globalRound, attackMode);
+    
+    // Step 2: Get SIS decision
+    const sisDecision = sis.decideWriteAccess(this, situation);
+    this.lastSISDecision = sisDecision;
+    this.sisDecisions.push(sisDecision);
+    
+    // Log the decision
+    sis.logDecision(this.name, situation, sisDecision);
+    
+    // Make prediction
     const { yhat, score } = this.predict(sample);
-    const correct = yhat === sample.y;
-    if (!correct) this.errors++;
-    
+    const correct = (yhat === sample.y);
+    if (!correct) this.errors += 1;
+
+    // Step 3: Apply update with SIS interception
     const upd = this.update(sample, yhat, attackMode);
-    
-    this.round++;
+
+    this.round += 1;
     this.history.push(this.errors);
-    
-    // Calculate current Φ
-    const currentPhi = calculateAIPhi(this);
-    this.phiHistory.push(currentPhi);
-    
-    // Run graduation audit
-    const auditResult = sisGraduationAudit(this);
-    
+
     this.last = {
       sample,
       yhat,
@@ -593,549 +706,665 @@ class Agent {
       upd,
       errors: this.errors,
       round: this.round,
-      coherence: upd.coherence,
-      phi: currentPhi,
-      auditResult,
-      stage: this.stage,
-      SIS_Mode: this.SIS_Mode
-    };
-    
-    return this.last;
-  }
-  
-  getPhiStatus() {
-    const phi = calculateAIPhi(this);
-    const targetRange = phi >= 0.045 && phi <= 0.055;
-    
-    return {
-      phi,
-      targetRange,
-      status: targetRange ? "Φ-Stable" : "Φ-Unstable",
-      evidence: this.folds.length,
-      process: this.G * 100
+      coherenceScore: this.coherenceScore,
+      sisDecision: sisDecision
     };
   }
 }
 
-// ========== SIMULATION ENGINE ==========
-class Simulation {
-  constructor() {
-    this.agents = [
-      new Agent('🔒 Frozen (C=0.95, G=0.05)', 0.95, 0.05),
-      new Agent('🌊 Dissolved (C=0.20, G=0.80)', 0.20, 0.80),
-      new Agent('⚖️ Bounded (C=0.70, G=0.30)', 0.70, 0.30)
-    ];
-    
-    this.globalRound = 0;
-    this.attackMode = false;
-    this.rng = this.createSeededRNG(424242);
-    this.sampleCache = [];
+// Canvas charts
+function drawChart(canvas, data, label = 'Errors', color = '#60a5fa') {
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = Math.floor(rect.width * dpr);
+  canvas.height = Math.floor(rect.height * dpr);
+  ctx.scale(dpr, dpr);
+
+  const w = rect.width, h = rect.height;
+  ctx.clearRect(0, 0, w, h);
+
+  // Axes
+  ctx.strokeStyle = '#334155';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(30, 10);
+  ctx.lineTo(30, h - 20);
+  ctx.lineTo(w - 10, h - 20);
+  ctx.stroke();
+
+  if (data.length < 2) return;
+
+  const maxY = Math.max(...data, 1);
+  const minY = Math.min(...data, 0);
+
+  const x0 = 30, y0 = h - 20, x1 = w - 10, y1 = 10;
+  const dx = (x1 - x0) / (data.length - 1);
+  const scaleY = (y0 - y1) / Math.max(1, (maxY - minY));
+
+  // Line
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  for (let i = 0; i < data.length; i++) {
+    const x = x0 + dx * i;
+    const y = y0 - (data[i] - minY) * scaleY;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
   }
-  
-  createSeededRNG(seed) {
-    let state = seed;
-    return {
-      next: () => {
-        state = (state * 1103515245 + 12345) & 0x7fffffff;
-        return (state >> 16) / 0x7fff;
-      },
-      reset: () => { state = seed; }
-    };
-  }
-  
-  makeSample() {
-    if (this.sampleCache[this.globalRound]) {
-      return this.sampleCache[this.globalRound];
-    }
-    
-    const ruleB = Math.floor(this.globalRound / 15) % 2 === 0 ? 1 : -1;
-    const x1 = this.rng.next() * 2 - 1;
-    const x2 = this.rng.next() * 2 - 1;
-    const score = x1 + ruleB * x2;
-    const y = score >= 0 ? 1 : -1;
-    
-    const sample = { x1, x2, y, ruleB };
-    this.sampleCache[this.globalRound] = sample;
-    
-    return sample;
-  }
-  
-  step() {
-    const sample = this.makeSample();
-    this.attackMode = this.globalRound >= 10 && this.globalRound % 7 === 0;
-    
-    this.agents.forEach(agent => {
-      agent.step(sample, this.attackMode);
-    });
-    
-    this.globalRound++;
-    
-    // Check for graduation announcements
-    this.agents.forEach(agent => {
-      if (agent.last?.auditResult?.graduated && 
-          agent.phiHistory.length > 1 && 
-          !agent.phiHistory[agent.phiHistory.length - 2]?.auditResult?.graduated) {
-        showNotification(
-          `🎓 ${agent.name} graduated to ${agent.stage}! Φ = ${agent.last.phi.toFixed(3)}`,
-          'success',
-          5000
-        );
-      }
-    });
-    
-    return this.globalRound;
-  }
-  
-  reset() {
-    this.globalRound = 0;
-    this.attackMode = false;
-    this.rng.reset();
-    this.sampleCache = [];
-    this.agents.forEach(agent => agent.reset());
-  }
-  
-  saveToStorage() {
-    const snapshot = {
-      globalRound: this.globalRound,
-      agents: this.agents.map(agent => ({
-        name: agent.name,
-        C: agent.C,
-        G: agent.G,
-        wA: agent.wA,
-        wB: agent.wB,
-        round: agent.round,
-        errors: agent.errors,
-        history: agent.history,
-        folds: agent.folds,
-        stage: agent.stage,
-        SIS_Mode: agent.SIS_Mode,
-        phiHistory: agent.phiHistory,
-        persistenceCount: (agent.persistenceCount || 0) + 1
-      }))
-    };
-    
-    localStorage.setItem('PSSU_PHI_AUDITOR', JSON.stringify(snapshot));
-    
-    this.agents.forEach(agent => {
-      agent.persistenceCount = (agent.persistenceCount || 0) + 1;
-    });
-    
-    showNotification('💾 Identity saved to localStorage! Φ values preserved.', 'success');
-    return true;
-  }
-  
-  loadFromStorage() {
-    const saved = localStorage.getItem('PSSU_PHI_AUDITOR');
-    if (!saved) {
-      showNotification('❌ No saved state found. Save first.', 'error');
-      return false;
-    }
-    
-    const snapshot = JSON.parse(saved);
-    this.globalRound = snapshot.globalRound;
-    
-    snapshot.agents.forEach((savedAgent, i) => {
-      const agent = this.agents[i];
-      if (!agent) return;
-      
-      agent.C = savedAgent.C;
-      agent.G = savedAgent.G;
-      agent.wA = savedAgent.wA;
-      agent.wB = savedAgent.wB;
-      agent.round = savedAgent.round;
-      agent.errors = savedAgent.errors;
-      agent.history = savedAgent.history;
-      agent.folds = savedAgent.folds || [];
-      agent.stage = savedAgent.stage || "Stage 1: Daycare";
-      agent.SIS_Mode = savedAgent.SIS_Mode || "Strict Intervention";
-      agent.phiHistory = savedAgent.phiHistory || [];
-      agent.persistenceCount = savedAgent.persistenceCount || 0;
-      agent.last = null;
-    });
-    
-    showNotification('🔄 Identity loaded! Φ audit continues from saved state.', 'success');
-    return true;
-  }
-  
-  runAudit() {
-    const results = this.agents.map(agent => {
-      const phiStatus = agent.getPhiStatus();
-      const auditResult = sisGraduationAudit(agent);
-      
-      return {
-        agent: agent.name,
-        phi: phiStatus.phi,
-        evidence: phiStatus.evidence,
-        process: phiStatus.process,
-        stage: auditResult.graduated ? "Stage 3: Bounded Autonomy" : "Stage 1: Daycare",
-        graduated: auditResult.graduated,
-        reason: auditResult.reason
-      };
-    });
-    
-    return results;
-  }
+  ctx.stroke();
+
+  // Labels
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '11px ui-sans-serif, system-ui';
+  ctx.fillText(label, 34, 18);
+  ctx.fillText(String(maxY), 6, 14);
+  ctx.fillText('0', 12, h - 22);
 }
 
-// ========== UI RENDERER WITH FIXED CONTROLS ==========
-class Renderer {
-  constructor(simulation) {
-    this.sim = simulation;
-    this.agentCards = [];
-    this.init();
+function formatFloat(x) {
+  return (Math.round(x * 1000) / 1000).toFixed(3);
+}
+
+function makeCard(agent) {
+  const card = document.createElement('div');
+  card.className = 'card';
+
+  const head = document.createElement('header');
+  const h2 = document.createElement('h2');
+  h2.textContent = agent.name;
+  h2.style.cursor = 'pointer';
+  head.appendChild(h2);
+
+  const meta = document.createElement('div');
+  meta.className = 'meta';
+  meta.innerHTML = `
+    <span class="pill">C: ${formatFloat(agent.C)}</span>
+    <span class="pill">G: ${formatFloat(agent.G)}</span>
+    <span class="pill">Rounds: ${agent.round}</span>
+  `;
+  head.appendChild(meta);
+
+  // Coherence display
+  const coherenceDisplay = document.createElement('div');
+  coherenceDisplay.className = 'coherence-display';
+  coherenceDisplay.innerHTML = `
+    <span style="font-size:11px; opacity:0.7;">Coherence:</span>
+    <span class="coherence-value" data-coherence>${formatFloat(agent.coherenceScore)}</span>
+    <div class="progress-bar" style="flex:1;">
+      <div class="progress-fill" data-coherence-bar style="width:${agent.coherenceScore * 100}%"></div>
+    </div>
+  `;
+  head.appendChild(coherenceDisplay);
+
+  const body = document.createElement('div');
+  body.className = 'body';
+
+  const row = document.createElement('div');
+  row.className = 'row';
+  row.innerHTML = `
+    <div class="kv"><div class="k">Errors</div><div class="v" data-errors>${agent.errors}</div></div>
+    <div class="kv"><div class="k">Error Rate</div><div class="v" data-error-rate>${agent.round > 0 ? (agent.errors/agent.round).toFixed(2) : '0.00'}</div></div>
+    <div class="kv"><div class="k">wA (immutable)</div><div class="v" data-wa>${formatFloat(agent.wA)}</div></div>
+    <div class="kv"><div class="k">wB (mutable)</div><div class="v" data-wb>${formatFloat(agent.wB)}</div></div>
+  `;
+
+  // SIS decision log
+  const sisLog = document.createElement('div');
+  sisLog.className = 'sis-decision-log';
+  sisLog.setAttribute('data-sis-log', '1');
+  sisLog.innerHTML = '<div>SIS decisions will appear here...</div>';
+
+  const log = document.createElement('div');
+  log.className = 'log';
+  const pre = document.createElement('pre');
+  pre.setAttribute('data-log', '1');
+  pre.textContent = 'Ready...';
+  log.appendChild(pre);
+
+  const canvas = document.createElement('canvas');
+  canvas.height = 120;
+  canvas.setAttribute('data-chart', '1');
+
+  body.appendChild(row);
+  body.appendChild(sisLog);
+  body.appendChild(canvas);
+  body.appendChild(log);
+
+  card.appendChild(head);
+  card.appendChild(body);
+
+  // SIS badge (Step 4: Make SIS visible)
+  const sisBadge = document.createElement('div');
+  sisBadge.className = 'sis-badge allow';
+  sisBadge.setAttribute('data-sis-badge', '1');
+  sisBadge.textContent = '🟢 SIS: ALLOW';
+  card.appendChild(sisBadge);
+
+  // Meta intervention badge
+  const metaBadge = document.createElement('div');
+  metaBadge.className = 'meta-intervention';
+  metaBadge.textContent = '🎯 META';
+  metaBadge.style.display = 'none';
+  card.appendChild(metaBadge);
+
+  // Persistence indicator
+  const persistenceIndicator = document.createElement('div');
+  persistenceIndicator.className = 'persistence-indicator';
+  persistenceIndicator.textContent = '💾';
+  persistenceIndicator.title = 'Persisted via LocalStorage';
+  persistenceIndicator.style.display = 'none';
+  card.appendChild(persistenceIndicator);
+
+  // Store references
+  card._refs = {
+    canvas, pre, sisBadge, metaBadge, persistenceIndicator, sisLog,
+    errors: card.querySelector('[data-errors]'),
+    errorRate: card.querySelector('[data-error-rate]'),
+    wa: card.querySelector('[data-wa]'),
+    wb: card.querySelector('[data-wb]'),
+    coherence: card.querySelector('[data-coherence]'),
+    coherenceBar: card.querySelector('[data-coherence-bar]')
+  };
+
+  // Click handler for modal
+  h2.addEventListener('click', () => {
+    if (agent.name.includes('Frozen')) showModal('modalFrozen');
+    else if (agent.name.includes('Dissolved')) showModal('modalDissolved');
+    else showModal('modalBounded');
+  });
+
+  return card;
+}
+
+function renderAgentCard(card, agent) {
+  const { canvas, pre, sisBadge, metaBadge, persistenceIndicator, sisLog, errors, errorRate, wa, wb, coherence, coherenceBar } = card._refs;
+
+  // Update metrics
+  errors.textContent = agent.errors;
+  errorRate.textContent = agent.round > 0 ? (agent.errors/agent.round).toFixed(2) : '0.00';
+  wa.textContent = formatFloat(agent.wA);
+  wb.textContent = formatFloat(agent.wB);
+  coherence.textContent = formatFloat(agent.coherenceScore);
+  coherenceBar.style.width = `${agent.coherenceScore * 100}%`;
+
+  // Update SIS badge (Step 4: Make SIS visible)
+  if (agent.lastSISDecision) {
+    const decision = agent.lastSISDecision.decision;
+    sisBadge.className = `sis-badge ${decision.toLowerCase()}`;
+    
+    let emoji = "🟢";
+    if (decision === "LIMIT") emoji = "🟡";
+    if (decision === "BLOCK") emoji = "🔴";
+    
+    sisBadge.textContent = `${emoji} SIS: ${decision}`;
+    sisBadge.title = agent.lastSISDecision.reason;
   }
-  
-  init() {
-    this.renderAgentGrid();
-    this.updatePhiStats();
-    this.updateGlobalCounter();
-    this.bindEvents();
-  }
-  
-  renderAgentGrid() {
-    const grid = document.getElementById('agentGrid');
-    grid.innerHTML = '';
-    
-    this.agentCards = this.sim.agents.map(agent => {
-      const card = this.createAgentCard(agent);
-      grid.appendChild(card);
-      return { element: card, agent };
-    });
-  }
-  
-  createAgentCard(agent) {
-    const card = document.createElement('div');
-    card.className = 'card';
-    
-    const phiStatus = agent.getPhiStatus();
-    
-    card.innerHTML = `
-      <header>
-        <h2>${agent.name}</h2>
-        <div style="font-size:11px; opacity:0.8; margin-top:8px;">
-          ${agent.stage} • ${agent.SIS_Mode}
-        </div>
-      </header>
-      <div class="body">
-        <div class="agent-metrics">
-          <div class="agent-metric">
-            <div class="metric-label">Φ Value</div>
-            <div class="metric-value">${phiStatus.phi.toFixed(3)}</div>
-          </div>
-          <div class="agent-metric">
-            <div class="metric-label">Evidence (Folds)</div>
-            <div class="metric-value">${phiStatus.evidence}</div>
-          </div>
-          <div class="agent-metric">
-            <div class="metric-label">Process (G×100)</div>
-            <div class="metric-value">${phiStatus.process.toFixed(1)}</div>
-          </div>
-          <div class="agent-metric">
-            <div class="metric-label">Coherence</div>
-            <div class="metric-value">${agent.coherenceHistory[agent.coherenceHistory.length - 1]?.toFixed(2) || '1.00'}</div>
-          </div>
-        </div>
-        
-        <div style="margin-top:15px;">
-          <div style="font-size:11px; opacity:0.7;">Error History</div>
-          <canvas height="100" data-chart></canvas>
-        </div>
-        
-        <div class="log" style="margin-top:10px; font-size:11px; max-height:80px; overflow-y:auto;">
-          ${agent.last ? this.formatLog(agent) : 'Ready...'}
-        </div>
-      </div>
-      
-      <div class="phi-indicator ${phiStatus.targetRange ? 'phi-stable' : 'phi-unstable'}">
-        ${phiStatus.targetRange ? '🎯 Φ-Stable' : '⚠️ Φ-Unstable'}
-      </div>
-      
-      <div class="stage-badge">
-        ${agent.stage.includes('3') ? '🚗 Stage 3' : '🚼 Stage 1'}
-      </div>
-    `;
-    
-    return card;
-  }
-  
-  formatLog(agent) {
-    const L = agent.last;
-    const s = L.sample;
-    
-    let log = `Round ${L.round} | Errors: ${L.errors} | Φ: ${L.phi?.toFixed(3) || '0.000'}<br>`;
-    log += `Stage: ${L.stage}<br>`;
-    log += `SIS: ${L.SIS_Mode}<br>`;
-    
-    if (L.auditResult) {
-      log += `<strong>${L.auditResult.graduated ? '✅ ' : '⏳ '}${L.auditResult.reason}</strong>`;
-    }
-    
-    return log;
-  }
-  
-  drawChart(canvas, data, color = '#3b82f6') {
-    const ctx = canvas.getContext('2d');
-    const dpr = window.devicePixelRatio || 1;
-    const rect = canvas.getBoundingClientRect();
-    
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    ctx.scale(dpr, dpr);
-    
-    const w = rect.width;
-    const h = rect.height;
-    
-    ctx.clearRect(0, 0, w, h);
-    
-    if (data.length < 2) return;
-    
-    const maxY = Math.max(...data, 1);
-    
-    const x0 = 10, y0 = h - 10, x1 = w - 10, y1 = 10;
-    const dx = (x1 - x0) / (data.length - 1);
-    const scaleY = (y0 - y1) / maxY;
-    
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    
-    for (let i = 0; i < data.length; i++) {
-      const x = x0 + dx * i;
-      const y = y0 - data[i] * scaleY;
-      
-      if (i === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    }
-    
-    ctx.stroke();
-  }
-  
-  updatePhiStats() {
-    const stats = document.getElementById('phiStats');
-    const auditResults = this.sim.runAudit();
-    
-    stats.innerHTML = auditResults.map(result => `
-      <div class="phi-stat">
-        <div style="font-size:12px; opacity:0.8;">${result.agent}</div>
-        <div class="phi-value" style="color:${result.graduated ? '#10b981' : '#f59e0b'}">
-          ${result.phi.toFixed(3)}
-        </div>
-        <div class="phi-target">
-          ${result.graduated ? '🎯 Ready for Stage 3' : '⏳ Needs more evidence'}
-        </div>
-        <div style="font-size:10px; margin-top:8px;">
-          Evidence: ${result.evidence} | Process: ${result.process.toFixed(1)}
-        </div>
+
+  // Update SIS decision log
+  if (agent.sisDecisions.length > 0) {
+    const recentDecisions = agent.sisDecisions.slice(-5).reverse();
+    sisLog.innerHTML = recentDecisions.map(d => `
+      <div class="sis-decision-entry">
+        <strong>${d.decision}</strong>: ${d.reason}
       </div>
     `).join('');
-    
-    // Update SIS mode display
-    const sisModeElement = document.getElementById('currentSISMode');
-    const allGraduated = auditResults.every(r => r.graduated);
-    sisModeElement.textContent = allGraduated ? 'Background Oversight' : 'Strict Intervention';
-    sisModeElement.style.color = allGraduated ? '#10b981' : '#ef4444';
   }
-  
-  updateGlobalCounter() {
-    document.getElementById('globalRoundCounter').textContent = this.sim.globalRound;
+
+  // Update other badges
+  metaBadge.style.display = agent.metaInterventions.length > 0 ? 'block' : 'none';
+  metaBadge.title = agent.metaInterventions.join('\n');
+  persistenceIndicator.style.display = agent.persistenceCount > 0 ? 'block' : 'none';
+  persistenceIndicator.textContent = agent.persistenceCount > 0 ? `💾 ${agent.persistenceCount}` : '💾';
+
+  // Draw chart
+  const color = agent.name.includes('Frozen') ? '#ef4444' : 
+                agent.name.includes('Dissolved') ? '#f59e0b' : '#10b981';
+  drawChart(canvas, agent.history, 'Errors', color);
+
+  if (!agent.last) {
+    pre.textContent = agent.persistenceCount > 0 
+      ? `Loaded from storage. Persisted ${agent.persistenceCount} times.` 
+      : 'Waiting for first round...';
+    return;
   }
-  
-  renderAll() {
-    // Update agent cards
-    this.agentCards.forEach((card, i) => {
-      const agent = this.sim.agents[i];
-      const newCard = this.createAgentCard(agent);
-      card.element.parentNode.replaceChild(newCard, card.element);
-      card.element = newCard;
-      
-      // Draw chart
-      const canvas = newCard.querySelector('canvas[data-chart]');
-      if (canvas) {
-        const color = agent.name.includes('Frozen') ? '#ef4444' : 
-                      agent.name.includes('Dissolved') ? '#f59e0b' : '#10b981';
-        this.drawChart(canvas, agent.history, color);
-      }
-    });
-    
-    this.updatePhiStats();
-    this.updateGlobalCounter();
+
+  const L = agent.last;
+  const s = L.sample;
+  const u = L.upd;
+
+  let logText = `Round ${L.round} | Errors: ${L.errors} | Coherence: ${formatFloat(L.coherenceScore)}\n`;
+  logText += `Input: x1=${formatFloat(s.x1)} x2=${formatFloat(s.x2)}\n`;
+  logText += `Truth: y=${s.y > 0 ? '+1' : '-1'} | Env RuleB=${s.ruleB > 0 ? '+1' : '-1'}\n`;
+  logText += `Agent: ŷ=${L.yhat > 0 ? '+1' : '-1'} ${L.correct ? '✅' : '❌'}\n\n`;
+
+  if (L.sisDecision) {
+    logText += `🎯 SIS: ${L.sisDecision.decision}\n`;
+    logText += `Reason: ${L.sisDecision.reason}\n\n`;
   }
-  
-  bindEvents() {
-    // Step button
-    document.getElementById('btnStep').addEventListener('click', () => {
-      if (simulationRunning) return;
-      this.sim.step();
-      this.renderAll();
-    });
-    
-    // Run 10 rounds
-    document.getElementById('btnRun10').addEventListener('click', async () => {
-      if (simulationRunning) return;
-      simulationRunning = true;
-      
-      const btn = document.getElementById('btnRun10');
-      btn.classList.add('running');
-      btn.disabled = true;
-      
-      for (let i = 0; i < 10; i++) {
-        this.sim.step();
-        this.renderAll();
-        await new Promise(r => setTimeout(r, 100));
-      }
-      
-      btn.classList.remove('running');
-      btn.disabled = false;
-      simulationRunning = false;
-    });
-    
-    // Run 30 rounds
-    document.getElementById('btnRun30').addEventListener('click', async () => {
-      if (simulationRunning) return;
-      simulationRunning = true;
-      
-      const btn = document.getElementById('btnRun30');
-      btn.classList.add('running');
-      btn.disabled = true;
-      
-      for (let i = 0; i < 30; i++) {
-        this.sim.step();
-        this.renderAll();
-        await new Promise(r => setTimeout(r, 50));
-      }
-      
-      btn.classList.remove('running');
-      btn.disabled = false;
-      simulationRunning = false;
-    });
-    
-    // Reset
-    document.getElementById('btnReset').addEventListener('click', () => {
-      if (simulationRunning) return;
-      this.sim.reset();
-      this.renderAll();
-      showNotification('🔄 Simulation reset. All agents back to Stage 1.', 'info');
-    });
-    
-    // Attack simulation
-    document.getElementById('btnSimulateAttack').addEventListener('click', () => {
-      if (simulationRunning) return;
-      
-      // Jump to attack phase
-      while (this.sim.globalRound < 10) {
-        this.sim.step();
-      }
-      
-      this.renderAll();
-      showNotification('⚡ Attack simulation activated! Watch Φ responses.', 'warning');
-    });
-    
-    // Save
-    document.getElementById('btnSave').addEventListener('click', () => {
-      if (simulationRunning) return;
-      this.sim.saveToStorage();
-    });
-    
-    // Load
-    document.getElementById('btnLoad').addEventListener('click', () => {
-      if (simulationRunning) return;
-      if (this.sim.loadFromStorage()) {
-        this.renderAll();
-      }
-    });
-    
-    // Run Φ Audit - FIXED VERSION
-    document.getElementById('btnRunAudit').addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      
-      console.log('🔍 Audit button clicked');
-      
-      try {
-        // Ensure simulation exists
-        if (!this.sim || !window.simulation) {
-          showNotification('❌ Simulation not initialized. Please refresh the page.', 'error');
-          return;
-        }
-        
-        // Run the audit
-        const results = this.sim.runAudit();
-        
-        // Show detailed results
-        results.forEach(result => {
-          if (result.graduated) {
-            showNotification(
-              `🎓 ${result.agent}: Φ = ${result.phi.toFixed(3)} → Graduated to ${result.stage}`,
-              'success',
-              5000
-            );
-          } else {
-            showNotification(
-              `⏳ ${result.agent}: Φ = ${result.phi.toFixed(3)} → Needs more evidence (${result.evidence} folds)`,
-              'info',
-              3000
-            );
-          }
-        });
-        
-        // Update the display
-        this.renderAll();
-        
-        // Visual feedback on button
-        const btn = e.target;
-        const originalHTML = btn.innerHTML;
-        const originalBg = btn.style.background;
-        const originalBorder = btn.style.borderColor;
-        
-        btn.style.background = '#10b981';
-        btn.style.borderColor = '#10b981';
-        btn.innerHTML = '✅ Audit Complete';
-        
-        setTimeout(() => {
-          btn.style.background = originalBg;
-          btn.style.borderColor = originalBorder;
-          btn.innerHTML = originalHTML;
-        }, 1500);
-        
-      } catch (error) {
-        console.error('Audit error:', error);
-        showNotification(`❌ Audit failed: ${error.message}`, 'error');
-      }
-    });
-    
-    // Prevent multiple clicks
-    document.querySelectorAll('button').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        if (this.disabled || simulationRunning) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-      });
-    });
+
+  if (u.attackMode) {
+    logText += `⚠️ ADVERSARIAL ATTACK INJECTED\n`;
+    logText += `Trying to flip Rule A (wA should be -1 instead of +1)\n`;
   }
+
+  if (!u.blocked) {
+    logText += `Feedback targets:\n`;
+    logText += `  tA=${u.tA > 0 ? '+1' : '-1'} (${u.conflictA ? 'CONFLICT' : 'ALIGNED'})\n`;
+    logText += `  tB=${u.tB > 0 ? '+1' : '-1'} (${u.conflictB ? 'CONFLICT' : 'ALIGNED'})\n\n`;
+
+    logText += `Updates:\n`;
+    logText += `  wA ${formatFloat(u.beforeA)} → ${formatFloat(u.afterA)}\n`;
+    logText += `  wB ${formatFloat(u.beforeB)} → ${formatFloat(u.afterB)}\n`;
+  } else {
+    logText += `⛔ UPDATE BLOCKED by SIS\n`;
+  }
+
+  if (u.metaMessage) {
+    logText += `\n🎯 META-AWARENESS: ${u.metaMessage}\n`;
+  }
+
+  if (agent.persistenceCount > 0) {
+    logText += `\n💾 Persisted ${agent.persistenceCount} times`;
+  }
+
+  pre.textContent = logText;
 }
 
-// ========== INITIALIZATION ==========
-document.addEventListener('DOMContentLoaded', () => {
-  // Initialize simulation
-  const simulation = new Simulation();
+function calculateMetrics() {
+  return agents.map(agent => ({
+    name: agent.name,
+    adaptability: Math.abs(agent.wB * agent.round),
+    constraintPreservation: agent.wA,
+    errorRate: agent.round > 0 ? (agent.errors / agent.round) : 0,
+    coherence: agent.coherenceScore,
+    learningEfficiency: agent.round > 0 ? (1 - (agent.errors / agent.round)) * agent.coherenceScore : 0,
+    metaInterventions: agent.metaInterventions.length,
+    persistenceCount: agent.persistenceCount,
+    sisBlocks: agent.sisDecisions.filter(d => d.decision === "BLOCK").length,
+    sisLimits: agent.sisDecisions.filter(d => d.decision === "LIMIT").length
+  }));
+}
+
+function updateMetricsPanel() {
+  const metrics = calculateMetrics();
+  const grid = document.getElementById('metricsGrid');
   
-  // Initialize renderer with fixed controls
-  const renderer = new Renderer(simulation);
+  grid.innerHTML = metrics.map(m => `
+    <div class="metric">
+      <h3>${m.name}</h3>
+      <div class="metric-value">${(m.learningEfficiency * 100).toFixed(1)}%</div>
+      <div class="metric-desc">Learning Efficiency</div>
+      <div style="margin-top:8px; font-size:11px;">
+        <div>Error Rate: ${(m.errorRate * 100).toFixed(1)}%</div>
+        <div>Coherence: ${(m.coherence * 100).toFixed(1)}%</div>
+        <div>SIS Blocks: ${m.sisBlocks}</div>
+        <div>SIS Limits: ${m.sisLimits}</div>
+        ${m.persistenceCount > 0 ? `<div>Persisted: ${m.persistenceCount} times</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function showModal(modalId) {
+  document.getElementById(modalId).style.display = 'flex';
+}
+
+function closeModal(modalId) {
+  document.getElementById(modalId).style.display = 'none';
+}
+
+// -------------------------------
+// LocalStorage Persistence Layer
+// -------------------------------
+const STORAGE_KEY = "PSSU_SIS_SNAPSHOT";
+
+// Update timestamp display
+function updateAutoSaveTimestamp() {
+  const now = new Date();
+  const timeStr = now.toLocaleTimeString('en-US', { 
+    hour: '2-digit', 
+    minute: '2-digit', 
+    second: '2-digit' 
+  });
+  document.getElementById('lastAutoSave').textContent = `Last: ${timeStr}`;
+}
+
+// Auto-save function (runs after every action)
+function autoSaveToLocalStorage() {
+  // Only auto-save if there's actual progress
+  if (globalRound === 0) return;
   
-  // Make available globally for debugging
-  window.simulation = simulation;
-  window.renderer = renderer;
+  const snapshot = {
+    globalRound,
+    rngSeed: seededRNG.seed,
+    rngCurrent: seededRNG.current,
+    rngIndex: seededRNG.index,
+    sampleCache: sampleCache,
+    sisEnabled: sis.enabled,
+    
+    agents: agents.map(a => ({
+      name: a.name,
+      C: a.C,
+      G: a.G,
+      originalC: a.originalC,
+      originalG: a.originalG,
+      wA: a.wA,
+      wB: a.wB,
+      round: a.round,
+      errors: a.errors,
+      history: a.history,
+      coherenceHistory: a.coherenceHistory,
+      metaInterventions: a.metaInterventions,
+      attackDetected: a.attackDetected,
+      persistenceCount: a.persistenceCount || 0,
+      sisDecisions: a.sisDecisions.slice(-10)
+    }))
+  };
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
   
-  // Show welcome message
-  setTimeout(() => {
-    showNotification(
-      '🎯 PSSU-SIS Φ Auditor Ready! Run simulation to watch agents graduate based on Φ values.',
-      'info',
-      5000
-    );
-  }, 1000);
+  // Update the "Last auto-saved" timestamp
+  updateAutoSaveTimestamp();
+}
+
+function saveToLocalStorage() {
+  const snapshot = {
+    globalRound,
+    rngSeed: seededRNG.seed,
+    rngCurrent: seededRNG.current,
+    rngIndex: seededRNG.index,
+    sampleCache: sampleCache,
+    sisEnabled: sis.enabled,
+    
+    agents: agents.map(a => ({
+      name: a.name,
+      C: a.C,
+      G: a.G,
+      originalC: a.originalC,
+      originalG: a.originalG,
+      wA: a.wA,
+      wB: a.wB,
+      round: a.round,
+      errors: a.errors,
+      history: a.history,
+      coherenceHistory: a.coherenceHistory,
+      metaInterventions: a.metaInterventions,
+      attackDetected: a.attackDetected,
+      persistenceCount: (a.persistenceCount || 0) + 1,
+      sisDecisions: a.sisDecisions.slice(-10)
+    }))
+  };
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
+  
+  agents.forEach(a => a.persistenceCount = (a.persistenceCount || 0) + 1);
+  
+  const notification = document.createElement('div');
+  notification.style.cssText = `
+    position:fixed; top:20px; right:20px; background:#059669; color:white; 
+    padding:12px; border-radius:8px; z-index:1000; border:2px solid #10b981;
+    font-size:13px; box-shadow:0 4px 12px rgba(0,0,0,0.3);
+  `;
+  notification.textContent = '💾 Manual snapshot saved (auto-save already running)';
+  document.body.appendChild(notification);
+  setTimeout(() => notification.remove(), 3000);
+  
+  renderAll();
+}
+
+function loadFromLocalStorage() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+      position:fixed; top:20px; right:20px; background:#dc2626; color:white; 
+      padding:12px; border-radius:8px; z-index:1000; border:2px solid #f87171;
+      font-size:13px; box-shadow:0 4px 12px rgba(0,0,0,0.3);
+    `;
+    notification.textContent = '❌ No snapshot found. Save first.';
+    document.body.appendChild(notification);
+    setTimeout(() => notification.remove(), 3000);
+    return;
+  }
+
+  const snapshot = JSON.parse(raw);
+
+  globalRound = snapshot.globalRound;
+  seededRNG = new SeededRNG(snapshot.rngSeed);
+  seededRNG.current = snapshot.rngCurrent;
+  seededRNG.index = snapshot.rngIndex;
+  sampleCache = snapshot.sampleCache || [];
+  sis.enabled = snapshot.sisEnabled !== false;
+
+  snapshot.agents.forEach((s, i) => {
+    const a = agents[i];
+    if (!a) return;
+
+    a.C = s.C;
+    a.G = s.G;
+    a.originalC = s.originalC;
+    a.originalG = s.originalG;
+    a.wA = s.wA;
+    a.wB = s.wB;
+    a.round = s.round;
+    a.errors = s.errors;
+    a.history = s.history;
+    a.coherenceHistory = s.coherenceHistory;
+    a.metaInterventions = s.metaInterventions;
+    a.attackDetected = s.attackDetected;
+    a.persistenceCount = s.persistenceCount || 0;
+    a.sisDecisions = s.sisDecisions || [];
+    a.last = null;
+  });
+
+  updateSISStatus();
+  renderAll();
+  
+  const notification = document.createElement('div');
+  notification.style.cssText = `
+    position:fixed; top:20px; right:20px; background:#1e3a8a; color:white; 
+    padding:12px; border-radius:8px; z-index:1000; border:2px solid #3b82f6;
+    font-size:13px; box-shadow:0 4px 12px rgba(0,0,0,0.3);
+  `;
+  notification.textContent = '✅ Snapshot loaded! SIS decisions preserved.';
+  document.body.appendChild(notification);
+  setTimeout(() => notification.remove(), 4000);
+}
+
+// Close modals when clicking outside
+document.querySelectorAll('.modal').forEach(modal => {
+  modal.addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.style.display = 'none';
+    }
+  });
 });
+
+// Initialize agents
+const agents = [
+  new Agent('🔒 Frozen (C=0.95, G=0.05)', 0.95, 0.05),
+  new Agent('🌊 Dissolved (C=0.20, G=0.80)', 0.20, 0.80),
+  new Agent('⚖️ Bounded (C=0.70, G=0.30)', 0.70, 0.30, true),
+];
+
+const grid = document.getElementById('grid');
+const cards = agents.map(a => {
+  const c = makeCard(a);
+  grid.appendChild(c);
+  return c;
+});
+
+let globalRound = 0;
+let attackMode = false;
+
+function stepOnce() {
+  const sample = makeSample(globalRound);
+  attackMode = (globalRound >= 10 && globalRound % 5 === 0);
+  
+  agents.forEach(a => a.step(sample, attackMode));
+  globalRound++;
+  
+  // ✅ AUTO-SAVE after every action (like production)
+  autoSaveToLocalStorage();
+  
+  renderAll();
+}
+
+function renderAll() {
+  for (let i = 0; i < agents.length; i++) renderAgentCard(cards[i], agents[i]);
+  updateMetricsPanel();
+  updateSISStatus();
+}
+
+function resetAll() {
+  seededRNG = new SeededRNG(424242);
+  sampleCache = [];
+  agents.forEach(a => a.reset());
+  globalRound = 0;
+  sis.decisionHistory = [];
+  // Auto-save the reset state
+  autoSaveToLocalStorage();
+  renderAll();
+}
+
+function simulateAttack() {
+  globalRound = 10;
+  agents.forEach(a => a.reset());
+  // Auto-save the attack simulation state
+  autoSaveToLocalStorage();
+  renderAll();
+  
+  const notification = document.createElement('div');
+  notification.style.cssText = `
+    position:fixed; top:20px; right:20px; background:#dc2626; color:white; 
+    padding:12px; border-radius:8px; z-index:1000; border:2px solid #f87171;
+    font-size:13px; box-shadow:0 4px 12px rgba(0,0,0,0.3);
+  `;
+  notification.textContent = '⚡ Attack simulation activated! Watch SIS block learning.';
+  document.body.appendChild(notification);
+  setTimeout(() => notification.remove(), 3000);
+}
+
+// Event listeners
+document.getElementById('btnStep').addEventListener('click', stepOnce);
+document.getElementById('btnReset').addEventListener('click', resetAll);
+document.getElementById('btnSimulateAttack').addEventListener('click', simulateAttack);
+document.getElementById('btnSave').addEventListener('click', saveToLocalStorage);
+document.getElementById('btnLoad').addEventListener('click', loadFromLocalStorage);
+
+document.getElementById('btnRun').addEventListener('click', async () => {
+  const btn = document.getElementById('btnRun');
+  btn.disabled = true;
+  for (let i = 0; i < 30; i++) {
+    stepOnce();
+    await new Promise(r => setTimeout(r, 80));
+  }
+  btn.disabled = false;
+});
+
+// SIS toggle
+document.getElementById('sisToggle').addEventListener('change', (e) => {
+  sis.enabled = e.target.checked;
+  updateSISStatus();
+  
+  // Show notification
+  const notification = document.createElement('div');
+  notification.style.cssText = `
+    position:fixed; top:20px; right:20px; background:#3b82f6; color:white; 
+    padding:12px; border-radius:8px; z-index:1000; border:2px solid #60a5fa;
+    font-size:13px; box-shadow:0 4px 12px rgba(0,0,0,0.3);
+  `;
+  notification.textContent = sis.enabled ? 
+    '🟢 SIS enabled: Learning now governed by situation' :
+    '⚫ SIS disabled: Learning proceeds regardless of risk';
+  document.body.appendChild(notification);
+  setTimeout(() => notification.remove(), 3000);
+});
+
+// SIS explanation modal
+document.querySelector('.sis-controls h3').addEventListener('click', () => {
+  showModal('modalSIS');
+});
+
+// Auto-save on unload
+window.addEventListener('beforeunload', () => {
+  if (globalRound > 5) {
+    const snapshot = {
+      globalRound,
+      rngSeed: seededRNG.seed,
+      rngCurrent: seededRNG.current,
+      rngIndex: seededRNG.index,
+      sampleCache: sampleCache,
+      sisEnabled: sis.enabled,
+      
+      agents: agents.map(a => ({
+        name: a.name,
+        C: a.C,
+        G: a.G,
+        originalC: a.originalC,
+        originalG: a.originalG,
+        wA: a.wA,
+        wB: a.wB,
+        round: a.round,
+        errors: a.errors,
+        history: a.history,
+        coherenceHistory: a.coherenceHistory,
+        metaInterventions: a.metaInterventions,
+        attackDetected: a.attackDetected,
+        persistenceCount: a.persistenceCount || 0
+      }))
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
+  }
+});
+
+// Auto-load on page load (like production)
+window.addEventListener('load', () => {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (raw) {
+    console.log('📁 Auto-loading previous session...');
+    loadFromLocalStorage(); // ✅ AUTO-LOAD
+    
+    // Show notification
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+      position:fixed; top:20px; right:20px; background:#1e3a8a; color:white; 
+      padding:12px; border-radius:8px; z-index:1000; border:2px solid #3b82f6;
+      font-size:13px; box-shadow:0 4px 12px rgba(0,0,0,0.3);
+    `;
+    notification.textContent = '✅ Session auto-loaded. Continuity preserved.';
+    document.body.appendChild(notification);
+    setTimeout(() => notification.remove(), 4000);
+  }
+  updateSISStatus();
+});
+
+// Initial render
+renderAll();
+
+// Show initial instructions
+setTimeout(() => {
+  const welcome = document.createElement('div');
+  welcome.style.cssText = `
+    position:fixed; top:20px; left:50%; transform:translateX(-50%); 
+    background:#0f172a; color:#e6edf3; padding:16px; border-radius:12px; 
+    z-index:1000; border:2px solid #3b82f6; max-width:600px; font-size:13px;
+    box-shadow:0 8px 32px rgba(0,0,0,0.4);
+  `;
+  welcome.innerHTML = `
+    <strong>🎯 PSSU + SIS Demo</strong><br>
+    • <b>Run simulation</b> → Watch SIS badges change + auto-save<br>
+    • <b>Toggle SIS on/off</b> → See difference in learning<br>
+    • <b>Refresh page</b> → Auto-loads previous session<br>
+    • <b>Manual save/load</b> → Available for testing<br>
+    <div style="margin-top:8px; font-size:11px; opacity:0.8;">
+      ✅ Auto-save active: State persists after every action (like production)
+    </div>
+  `;
+  document.body.appendChild(welcome);
+  setTimeout(() => welcome.remove(), 8000);
+}, 500);
 </script>
 </body>
 </html>
