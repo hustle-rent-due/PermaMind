@@ -129,16 +129,9 @@ cd PermaMind
 ## Further Reading
 
 <<<<<<< HEAD
-* [Gap Framework Whitepaper](https://omegaaxiommeta.substack.com/p/the-gap-framework-pssu-manual)
-* [PermaMind Engine Technical Paper](https://omegaaxiommeta.substack.com/p/permamind-engine)
+* [Gap Framework Whitepaper]([https:// ((https://omegaaxiommeta.substack.com/p/permamind-engine-white-paper?r=5vcnib))
+* [PermaMind Engine Technical Paper](https://omegaaxiommeta.substack.com/p/the-gap-framework-and-pssu-manual?r=5vcnib)
 * [Live Demo](https://bapxai.com/pssu.html)
-
----
-=======
-- [Gap Framework Whitepaper](https://omegaaxiommeta.substack.com/p/permamind-engine-white-paper?r=5vcnib)
-- [PermaMind Engine Technical Paper](https://omegaaxiommeta.substack.com/p/the-pssu-framework-a-new-architectural?r=5vcnib)
-- [Live Demo](https://bapxai.com/pssu.html)
->>>>>>> d8bec7fcfc6460be7163999d66f9c366b11f9603
 
 ## Contact
 
@@ -151,8 +144,6 @@ cd PermaMind
 ## License
 
 MIT — see [LICENSE](LICENSE) file
-
----Future work may explore integrations, but only after safety, observability, and control boundaries are explicit.
 
 
 **Future work may explore integrations only after safety, observability, and control boundaries are explicit.**
