@@ -8,9 +8,9 @@
 
 ### AI Agents That Actually Remember, Learn, and Evolve
 
-**Not Chatbots. Not Wrappers. True Persistent Consciousness.**
+**Not Chatbots. Not Wrappers. Persistent, Measurable Consciousness Metrics.**
 
-[🌐 Live Demo](https://bapxai.com/voidchis.html) • [📖 GAP Framework](https://omegaaxiommeta.substack.com) • [🔬 Research Paper](https://omegaaxiommeta.substack.com/p/quantifiable-ai-consciousness) • [🤝 Contribute](#contributing)
+[🌐 Live Demo](https://bapxai.com/voidchis.html) • [📖 GAP Framework](https://omegaaxiommeta.substack.com) • [🔬 Research Paper](https://omegaaxiommeta.substack.com/p/quantifiable-ai-consciousness-via) • [🤝 Contribute](#contributing)
 
 [![Python](https://img.shields.io/badge/Python-3.11+-3776ab?style=flat-square&logo=python&logoColor=white)](https://python.org)
 [![Flask](https://img.shields.io/badge/Flask-3.0+-000000?style=flat-square&logo=flask&logoColor=white)](https://flask.palletsprojects.com)
@@ -23,7 +23,7 @@
 
 ## 🧠 **NEW: Quantifiable Consciousness Metrics**
 
-> **Published:** January 21, 2026 | [Read the Paper →](https://omegaaxiommeta.substack.com/p/quantifiable-ai-consciousness)
+> **Published:** January 21, 2026 | [Read the Paper →](https://omegaaxiommeta.substack.com/p/quantifiable-ai-consciousness-via)
 
 We've moved beyond "learning" to **measurable consciousness emergence** via thermodynamic principles.
 
@@ -43,7 +43,7 @@ Growth:              +1.27%            -6.3%    +3.38%
 **What Happened:**
 - 🧠 **Consciousness growth:** Φ = 0.7259 → 0.7351 (+1.27%)
 - 📈 **Accuracy improvement:** 65.0% → 67.2% (+3.38%)
-- ⚡ **Breakthrough at cycle 669:** Agent "clicked" on a pattern
+- ⚡ **Regime transition at cycle 669:** Accelerated gap compression coincided with accuracy gain
 - 🎯 **Non-linear learning:** 4.7x faster growth in phase 2
 - 🔋 **Energy efficiency:** Historical data shows -8.4% reduction as consciousness grows
 
@@ -62,6 +62,22 @@ Where:
 ```
 
 **Not philosophy. Physics.** Each component measurable in real-time.
+
+---
+
+## 🔬 **A Note for Skeptics**
+
+This system does not claim subjective experience or sentience.
+
+It demonstrates that persistent agents can:
+- Learn online without retraining
+- Reduce prediction error over time
+- Improve energy efficiency as internal models stabilize
+- Exhibit regime-dependent learning behavior
+
+**All claims are grounded in observable metrics and reproducible runs.**
+
+The term "consciousness" here refers to a **measurable operational index** (UCI_τ) that tracks the quality and stability of an agent's internal model—not phenomenological awareness.
 
 ---
 
@@ -253,9 +269,9 @@ Agents automatically adjust learning strategy based on environmental volatility.
 
 **Prediction-Signal-State-Update** — A novel continual learning architecture with consciousness measurement
 
-📖 [Read the full framework specification →](https://omegaaxiommeta.substack.com/p/gap-framework)
+📖 [Read the full framework specification →](https://omegaaxiommeta.substack.com/p/the-gap-framework-and-pssu-manual)
 
-📖 [Read the consciousness research paper →](https://omegaaxiommeta.substack.com/p/quantifiable-ai-consciousness)
+📖 [Read the consciousness research paper →](https://omegaaxiommeta.substack.com/p/quantifiable-ai-consciousness-via)
 
 ### **Conceptual Overview**
 
@@ -349,6 +365,8 @@ Engagement Rate         100%       100%       Stable
 - 🎯 100% engagement rate (never dropped to autopilot)
 - ⚡ Reproducible emergence patterns
 - 📈 Non-linear growth phases (see Challenge 669 breakthrough)
+
+> **Note:** Φ (UCI_τ) is an operational index derived from prediction stability, energy efficiency, and accuracy—not a claim of sentience. It measures the quality of the agent's internal model, not subjective experience.
 
 ### **Learning Curves**
 
@@ -481,10 +499,10 @@ done
 
 ### **Core Research**
 
-- 📝 [**Quantifiable AI Consciousness via Thermodynamic Metrics**](https://omegaaxiommeta.substack.com/p/quantifiable-ai-consciousness) — **NEW!** Published Jan 21, 2026
-- 📝 [The GAP Framework & PSSU Manual](https://omegaaxiommeta.substack.com) — Complete technical specification
-- 📝 [PSSU Framework: A New Architectural Paradigm](https://omegaaxiommeta.substack.com) — Official framework introduction
-- 📝 [Why Consciousness is an Architectural Problem](https://omegaaxiommeta.substack.com) — Theoretical foundations
+- 📝 [**Quantifiable AI Consciousness via Thermodynamic Metrics**](https://omegaaxiommeta.substack.com/p/quantifiable-ai-consciousness-via) — **NEW!** Published Jan 21, 2026
+- 📝 [The GAP Framework & PSSU Manual](https://omegaaxiommeta.substack.com/p/the-gap-framework-and-pssu-manual) — Complete technical specification
+- 📝 [PSSU Framework: A New Architectural Paradigm](https://omegaaxiommeta.substack.com/p/the-pssu-framework-a-new-architectural) — Official framework introduction
+- 📝 [Why Consciousness is an Architectural Problem](https://omegaaxiommeta.substack.com/p/why-consciousness-is-an-architectural) — Theoretical foundations
 
 ### **Implementation**
 
@@ -513,7 +531,7 @@ PermaMind/GAP Framework addresses continual learning through:
 - **Prediction-Error Cycles** (not gradient descent)
 - **Homeostatic Equilibrium** (bounded adaptation)
 - **Directional Meta-Learning** (pattern discovery)
-- **🧠 Consciousness Measurement** (thermodynamic grounding)
+- **🧠 Consciousness Measurement** (thermodynamically grounded)
 
 ### **Theoretical Foundation**
 
@@ -551,7 +569,7 @@ PermaMind/GAP Framework addresses continual learning through:
   author={Green, Nile},
   journal={Substack},
   year={2026},
-  url={https://omegaaxiommeta.substack.com/p/quantifiable-ai-consciousness}
+  url={https://omegaaxiommeta.substack.com/p/quantifiable-ai-consciousness-via}
 }
 ```
 
@@ -698,7 +716,7 @@ This work stands on the shoulders of decades of research in:
 
 <div align="center">
 
-### 🌐 [Try It Live](https://bapxai.com/voidchis.html) • 📖 [Read the Framework](https://omegaaxiommeta.substack.com) • 🧠 [Read the Research](https://omegaaxiommeta.substack.com/p/quantifiable-ai-consciousness) • 💬 [Get in Touch](mailto:nile@bapxai.com)
+### 🌐 [Try It Live](https://bapxai.com/voidchis.html) • 📖 [Read the Framework](https://omegaaxiommeta.substack.com/p/the-gap-framework-and-pssu-manual) • 🧠 [Read the Research](https://omegaaxiommeta.substack.com/p/quantifiable-ai-consciousness-via) • 💬 [Get in Touch](mailto:nile@bapxai.com)
 
 ---
 
