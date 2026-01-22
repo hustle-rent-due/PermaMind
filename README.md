@@ -662,6 +662,8 @@ We welcome contributions in specific areas:
 
 <div align="center">
 
+<img src="https://github.com/hustle-rent-due.png" alt="Nile Green" width="150" style="border-radius: 50%;" />
+
 ### **Nile Green**
 
 *Independent AI Researcher*  
