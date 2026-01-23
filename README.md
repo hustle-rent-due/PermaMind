@@ -224,7 +224,7 @@ Agents automatically adjust learning strategy based on environmental volatilityâ
 | Metric | Status |
 |--------|--------|
 | **Uptime Since** | Jan 2, 2026 |
-| **Total Agents Created** | 1000+ Genesis Generation |
+| **Total Agents Created** | 30 Genesis Generation |
 | **Learning Events** | Thousands Processed |
 | **Coherence Range** | Î¦ = 0.72 - 0.77 |
 | **Avg Energy Efficiency** | -8.4% improvement over time |
