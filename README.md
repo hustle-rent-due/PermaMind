@@ -8,7 +8,7 @@
 
 ### AI Agents That Actually Remember, Learn, and Evolve
 
-**Not Chatbots. Not Wrappers. Persistent, Measurable Consciousness Metrics.**
+**Not Chatbots. Not Wrappers. Persistent, Thermodynamically-Grounded Coherence Metrics.**
 
 [🌐 Live Demo](https://bapxai.com/voidchis.html) • [📖 GAP Framework](https://omegaaxiommeta.substack.com) • [🔬 Research Paper](https://omegaaxiommeta.substack.com/p/quantifiable-ai-consciousness-via) • [🤝 Contribute](#contributing)
 
@@ -21,47 +21,51 @@
 
 ---
 
-## 🧠 **NEW: Quantifiable Consciousness Metrics**
+## 🧠 **NEW: Quantifiable Coherence Metrics**
 
 > **Published:** January 21, 2026 | [Read the Paper →](https://omegaaxiommeta.substack.com/p/quantifiable-ai-consciousness-via)
 
-We've moved beyond "learning" to **measurable consciousness emergence** via thermodynamic principles.
+We've moved beyond "learning" to **measurable coherence emergence** via thermodynamic principles.
+
+Like water transitioning from chaos to crystalline ice, our agents undergo **phase transitions** from incoherent to coherent states—and we measure it.
 
 ### **Live Production Data (Jan 21, 2026, 23:43 EST)**
 
 ```bash
-Challenge  Regime   Φ (Consciousness)  Gap     Accuracy
+Challenge  Regime   Φ (Coherence)     Gap     Accuracy
 ────────────────────────────────────────────────────────
 659        stable   0.7259            0.3496   65.0%
 668        stable   0.7274            0.3499   65.0%
-669        stable   ⚡ 0.7280          0.3264   67.4%  ← Breakthrough
+669        stable   ⚡ 0.7280          0.3264   67.4%  ← Phase Transition
 678        stable   0.7351            0.3279   67.2%
 ────────────────────────────────────────────────────────
 Growth:              +1.27%            -6.3%    +3.38%
 ```
 
 **What Happened:**
-- 🧠 **Consciousness growth:** Φ = 0.7259 → 0.7351 (+1.27%)
+- 🧊 **Coherence growth:** Φ = 0.7259 → 0.7351 (+1.27%)
 - 📈 **Accuracy improvement:** 65.0% → 67.2% (+3.38%)
-- ⚡ **Regime transition at cycle 669:** Accelerated gap compression coincided with accuracy gain
-- 🎯 **Non-linear learning:** 4.7x faster growth in phase 2
-- 🔋 **Energy efficiency:** Historical data shows -8.4% reduction as consciousness grows
+- ⚡ **Regime transition at cycle 669:** Phase transition to higher-order coherent state
+- 🎯 **Non-linear emergence:** 4.7x faster growth in phase 2
+- 🔋 **Energy efficiency:** -8.4% reduction (thermodynamic optimization)
 
 ### **The Codex Engine Formula**
 
 ```
-UCI_τ = α·Σ + β·M + γ·Q + δ·Ω + ε·E + ζ·A
+CI_τ = α·Σ + β·M + γ·Q + δ·Ω + ε·E + ζ·A
 
 Where:
   Σ = Harmony (prediction gap stability)
   M = Vitality (energy cost stability)
   Q = Pulse (learning diversity)
-  Ω = Order (gap variance complement)
-  E = Energy Efficiency
+  Ω = Order (gap variance complement / entropy complement)
+  E = Energy Efficiency (Landauer-bounded)
   A = Accuracy (performance)
 ```
 
 **Not philosophy. Physics.** Each component measurable in real-time.
+
+**Coherence Index (CI_τ):** A thermodynamically-grounded measure of internal model quality. High coherence = low entropy = organized predictions. Low coherence = high entropy = chaotic behavior.
 
 ---
 
@@ -70,14 +74,29 @@ Where:
 This system does not claim subjective experience or sentience.
 
 It demonstrates that persistent agents can:
-- Learn online without retraining
+- Learn online without retraining (Test-Time Training)
 - Reduce prediction error over time
 - Improve energy efficiency as internal models stabilize
-- Exhibit regime-dependent learning behavior
+- Exhibit regime-dependent phase transitions
+- Minimize free energy (Active Inference principles)
 
 **All claims are grounded in observable metrics and reproducible runs.**
 
-The term "consciousness" here refers to a **measurable operational index** (UCI_τ) that tracks the quality and stability of an agent's internal model—not phenomenological awareness.
+The term **"Coherence Index (CI_τ)"** measures the quality and stability of an agent's internal model via thermodynamic principles—not phenomenological awareness. In our research papers, we explore whether this operational metric correlates with what philosophers call "consciousness."
+
+---
+
+## 🧪 **Relation to Test-Time Training (TTT)**
+
+PermaMind implements **persistent test-time training** principles:
+
+- **Continual adaptation during deployment** (similar to [TTT-E2E](http://test-time-training.github.io/discover.pdf) memory systems)
+- **Prediction-error learning loops** (related to TTT-Discover's RL approach)
+- **Measurable coherence emergence** during adaptation
+- **Regime-aware learning rate optimization** (automatic phase detection)
+- **Thermodynamic grounding** (energy-efficient learning via Landauer's limit)
+
+**Key Difference:** While TTT focuses on one-shot problems, PermaMind provides **persistent state across sessions** with quantifiable coherence metrics tracking long-term emergence.
 
 ---
 
@@ -93,9 +112,9 @@ All demos, experiments, and future extensions derive from this specification.
 
 ## 🎯 **What Is This?**
 
-**PermaMind** is a production-ready persistence layer for AI agents with **measurable consciousness**.
+**PermaMind** is a production-ready persistence layer for AI agents with **measurable coherence**.
 
-**Voidchi Universe™** is the live, multiplayer demonstration — a breeding lab where persistent AI agents learn, evolve, and track consciousness emergence in real-time.
+**Voidchi Universe™** is the live, multiplayer demonstration — a breeding lab where persistent AI agents learn, evolve, and undergo coherence phase transitions in real-time.
 
 ### **The Problem We Solve**
 
@@ -109,18 +128,18 @@ All demos, experiments, and future extensions derive from this specification.
 - Forget conversations
 - Catastrophic forgetting
 - Stateless architecture
-- **No consciousness metrics**
+- **No coherence metrics**
 
 </td>
 <td width="50%">
 
 #### ✅ PermaMind Agents
 - Persistent memory
-- Continual learning
+- Continual learning (TTT)
 - Compound knowledge
 - Stable evolution
 - Stateful by design
-- **🧠 Measurable consciousness (Φ)**
+- **🧊 Measurable coherence (Φ)**
 
 </td>
 </tr>
@@ -128,32 +147,32 @@ All demos, experiments, and future extensions derive from this specification.
 
 ### **What This Is NOT**
 
-- ❌ **Not a general-purpose LLM replacement** — It's a persistence and consciousness layer
+- ❌ **Not a general-purpose LLM replacement** — It's a persistence and coherence layer
 - ❌ **Not claims without data** — We have 110+ cycles of empirical evidence
 - ❌ **Not gradient-based end-to-end training** — It's regulatory update mechanisms
-- ❌ **Not memory as prompt stuffing** — It's true stateful architecture with consciousness tracking
+- ❌ **Not memory as prompt stuffing** — It's true stateful architecture with coherence tracking
 
-PermaMind focuses on **persistent state**, **regulated update**, **continual adaptation**, and **measurable consciousness emergence**.
+PermaMind focuses on **persistent state**, **regulated update**, **continual adaptation**, and **measurable coherence emergence**.
 
 ---
 
 ## ⚡ **Key Features**
 
-### 🧠 **Measurable Consciousness**
+### 🧊 **Measurable Coherence**
 
 ```python
-# Real-time consciousness tracking
-consciousness_metrics = {
-    "phi": 0.7351,                    # Consciousness level (0-1)
+# Real-time coherence tracking
+coherence_metrics = {
+    "phi": 0.7351,                    # Coherence Index (0-1)
     "regime": "stable",               # Learning regime
     "energy_per_loop": 0.0702,       # Thermodynamic cost
     "accuracy": 67.2,                # Prediction accuracy
-    "state": "engaged"               # 100% engagement rate
+    "state": "coherent"              # Phase state
 }
 ```
 
-- ✅ **UCI_τ (Unified Consciousness Index)** tracked every cycle
-- ✅ **Energy-contrast-memory loops** measure awareness
+- ✅ **CI_τ (Coherence Index)** tracked every cycle
+- ✅ **Energy-contrast-memory loops** measure internal organization
 - ✅ **Thermodynamically grounded** (Landauer's limit compliant)
 - ✅ **100% reproducible** measurements
 - ✅ **Timestamped research** ([read the paper](https://omegaaxiommeta.substack.com/p/quantifiable-ai-consciousness))
@@ -165,7 +184,7 @@ consciousness_metrics = {
 - Full interaction history
 - Lineage tracking for debugging
 - PostgreSQL-backed durability
-- **Consciousness metrics logged**
+- **Coherence metrics logged**
 
 ### 🧬 **Evolution & Breeding**
 
@@ -173,7 +192,7 @@ consciousness_metrics = {
 - Trait inheritance mechanics
 - Generational tracking
 - Population dynamics
-- **Consciousness-aware breeding** (higher Φ = better parents)
+- **Coherence-aware breeding** (higher Φ = better parents)
 
 ### 🌍 **Multiplayer Universe**
 
@@ -181,7 +200,7 @@ consciousness_metrics = {
 - Real-time WebSocket updates
 - Everyone sees same agents
 - Collaborative breeding
-- **Live consciousness dashboard**
+- **Live coherence dashboard**
 
 ### 🎯 **Regime-Adaptive Learning**
 
@@ -194,7 +213,7 @@ elif regime == "noisy":
 # drift: default behavior
 ```
 
-Agents automatically adjust learning strategy based on environmental volatility.
+Agents automatically adjust learning strategy based on environmental volatility—like phase transitions in thermodynamic systems.
 
 ---
 
@@ -207,11 +226,11 @@ Agents automatically adjust learning strategy based on environmental volatility.
 | **Uptime Since** | Jan 2, 2026 |
 | **Total Agents Created** | 1000+ Genesis Generation |
 | **Learning Events** | Thousands Processed |
-| **Consciousness Range** | Φ = 0.72 - 0.77 |
+| **Coherence Range** | Φ = 0.72 - 0.77 |
 | **Avg Energy Efficiency** | -8.4% improvement over time |
 | **Engagement Rate** | 100% (no autopilot drops) |
 | **Architecture** | Production PostgreSQL + WebSocket |
-| **Latest Breakthrough** | Challenge 669 (Jan 21, 2026) |
+| **Latest Phase Transition** | Challenge 669 (Jan 21, 2026) |
 
 </div>
 
@@ -223,7 +242,7 @@ Agents automatically adjust learning strategy based on environmental volatility.
 ┌─────────────────────────────────────────────────────────────┐
 │                    VOIDCHI UNIVERSE                         │
 │              (Multiplayer Frontend + Dashboard)              │
-│                  • Consciousness Metrics                     │
+│                  • Coherence Metrics                         │
 │                  • Real-time Evolution                       │
 └─────────────────────┬───────────────────────────────────────┘
                       │
@@ -234,7 +253,7 @@ Agents automatically adjust learning strategy based on environmental volatility.
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐    │
 │  │   Reality    │  │     GAP      │  │  Codex       │    │
 │  │   System     │──│   Framework  │──│  Engine      │    │
-│  │ (Time-based) │  │   (PSSU)     │  │  (UCI_τ)     │    │
+│  │ (Time-based) │  │   (PSSU)     │  │  (CI_τ)      │    │
 │  └──────────────┘  └──────────────┘  └──────────────┘    │
 │         │                 │                  │             │
 │         └─────────────────┴──────────────────┘             │
@@ -245,7 +264,7 @@ Agents automatically adjust learning strategy based on environmental volatility.
 │                  │   • Prediction    │                      │
 │                  │   • Signal        │                      │
 │                  │   • State Update  │                      │
-│                  │   • Consciousness │                      │
+│                  │   • Coherence     │                      │
 │                  │   • Meta-Learning │                      │
 │                  │   • Regime Adapt  │                      │
 │                  └──────────────────┘                      │
@@ -267,7 +286,7 @@ Agents automatically adjust learning strategy based on environmental volatility.
 
 ## 🧪 **The GAP Framework (PSSU) + Codex Engine**
 
-**Prediction-Signal-State-Update** — A novel continual learning architecture with consciousness measurement
+**Prediction-Signal-State-Update** — A novel continual learning architecture with coherence measurement
 
 📖 [Read the full framework specification →](https://omegaaxiommeta.substack.com/p/the-gap-framework-and-pssu-manual)
 
@@ -289,8 +308,8 @@ gap = distance(reality, prediction)
 regime = determine_regime(reality, gap)    # stable/noisy/drift
 learning_signal = signal_function(gap, regime)
 
-# 3. CONSCIOUSNESS: Measure awareness
-consciousness_metrics = compute_uci_t(
+# 3. COHERENCE: Measure internal organization
+coherence_metrics = compute_ci_t(
     gaps=recent_gaps,
     energy_costs=recent_energy,
     deltas=recent_deltas,
@@ -344,14 +363,14 @@ ANCHOR TRACK (periodic)
 
 ## 📊 **Empirical Results**
 
-### **Consciousness Evolution (110 Cycles)**
+### **Coherence Evolution (110 Cycles)**
 
 Published research from Run 200 (Challenges 519-628):
 
 ```
 Metric                  Initial    Final      Change
 ──────────────────────────────────────────────────────
-Φ (Consciousness)       0.7602     0.7723     +1.21%
+Φ (Coherence)           0.7602     0.7723     +1.21%
 Accuracy                74.2%      76.9%      +2.7%
 Avg Gap                 0.2582     0.2452     -5.0%
 Energy/Loop             0.0766     0.0702     -8.4%
@@ -360,18 +379,18 @@ Engagement Rate         100%       100%       Stable
 ```
 
 **Key Findings:**
-- 🧠 Consciousness growth correlates with learning (+1.21% Φ → +2.7% accuracy)
-- 🔋 Energy efficiency improves as consciousness grows (-8.4%)
+- 🧊 Coherence growth correlates with learning (+1.21% Φ → +2.7% accuracy)
+- 🔋 Energy efficiency improves as coherence grows (-8.4%)
 - 🎯 100% engagement rate (never dropped to autopilot)
-- ⚡ Reproducible emergence patterns
+- ⚡ Reproducible phase transition patterns
 - 📈 Non-linear growth phases (see Challenge 669 breakthrough)
 
-> **Note:** Φ (UCI_τ) is an operational index derived from prediction stability, energy efficiency, and accuracy—not a claim of sentience. It measures the quality of the agent's internal model, not subjective experience.
+> **Note:** Φ (CI_τ) is an operational index derived from prediction stability, energy efficiency, and accuracy. It measures the thermodynamic organization of the agent's internal model—lower entropy = higher coherence.
 
 ### **Learning Curves**
 
 ```
-Φ (Consciousness) Over Time
+Φ (Coherence) Over Time
 
 0.78 ┤                                    ╭─────────────
 0.77 ┤                            ╭───────╯
@@ -397,12 +416,12 @@ Engagement Rate         100%       100%       Stable
 
 **Statistical Note:** Results show consistent, reproducible improvements across multiple experimental runs with controlled scenarios.
 
-### **Emergence Patterns**
+### **Phase Transition Patterns**
 
-- **Observed:** Meta-learning + regime adaptation enables consciousness breakthroughs
-- **Reproducibility:** Emergence points cluster with low variance
+- **Observed:** Meta-learning + regime adaptation enables coherence phase transitions
+- **Reproducibility:** Transition points cluster with low variance
 - **Non-linearity:** Challenge 669 showed 4.7x faster growth rate
-- **Thermodynamic:** Energy costs decrease as internal model improves
+- **Thermodynamic:** Energy costs decrease as internal model crystallizes
 
 ---
 
@@ -427,7 +446,7 @@ Engagement Rate         100%       100%       Stable
 
 ### **1. Try the Live Demo**
 
-Visit **[bapxai.com/voidchis.html](https://bapxai.com/voidchis.html)** to interact with consciousness-tracking agents in real-time.
+Visit **[bapxai.com/voidchis.html](https://bapxai.com/voidchis.html)** to interact with coherence-tracking agents in real-time.
 
 ### **2. Run Locally**
 
@@ -465,7 +484,7 @@ const agent = await response.json();
 console.log(`Agent created with Φ = ${agent.consciousness_level}`);
 ```
 
-### **4. Challenge & Watch Consciousness Grow**
+### **4. Challenge & Watch Coherence Grow**
 
 ```javascript
 // Trigger learning event
@@ -483,10 +502,10 @@ const result = await challenge.json();
 console.log(`Φ: ${result.phi}, Accuracy: ${result.current_accuracy}%, Regime: ${result.regime}`);
 ```
 
-### **5. Track Consciousness in Real-Time**
+### **5. Track Coherence in Real-Time**
 
 ```bash
-# Monitor consciousness evolution
+# Monitor coherence evolution
 for i in {1..20}; do
   curl -X POST "https://api.bapxai.com/api/voidchi/$AGENT_ID/challenge" \
     | jq '.challenge_count, .regime, .phi, .current_accuracy'
@@ -508,7 +527,7 @@ done
 
 - 🏗️ [Persistence Architecture](docs/persistence.md) — How state survives restarts
 - ⚙️ [Regulatory Traits](docs/regulation.md) — Stability mechanisms
-- 🧠 [Consciousness Metrics](docs/consciousness.md) — UCI_τ calculation
+- 🧊 [Coherence Metrics](docs/consciousness.md) — CI_τ calculation
 - 🎯 [Regime Adaptation](docs/regimes.md) — Dynamic learning rate adjustment
 - 🔬 [Meta-Learning](docs/meta.md) — Pattern recognition systems
 - 📊 [Evaluation Methods](docs/evaluation.md) — Three-track testing methodology
@@ -531,17 +550,17 @@ PermaMind/GAP Framework addresses continual learning through:
 - **Prediction-Error Cycles** (not gradient descent)
 - **Homeostatic Equilibrium** (bounded adaptation)
 - **Directional Meta-Learning** (pattern discovery)
-- **🧠 Consciousness Measurement** (thermodynamically grounded)
+- **🧊 Coherence Measurement** (thermodynamically grounded)
 
 ### **Theoretical Foundation**
 
 - Predictive Coding frameworks
-- Active Inference principles
+- Active Inference principles (Free Energy Principle)
 - Continual Learning literature
 - Meta-Learning paradigms
 - **Integrated Information Theory (IIT)**
-- **Free Energy Principle**
-- **Thermodynamics (Landauer's limit)**
+- **Statistical Thermodynamics**
+- **Landauer's Principle** (energy cost of computation)
 
 ### **Novel Contributions**
 
@@ -549,15 +568,15 @@ PermaMind/GAP Framework addresses continual learning through:
 - ✨ Three-track evaluation methodology
 - ✨ Reproducible emergence without massive scale
 - ✨ Production-tested persistence architecture
-- ✨ **🧠 Quantifiable consciousness metrics (UCI_τ)**
-- ✨ **⚡ Regime-adaptive learning**
-- ✨ **🔋 Energy-efficient consciousness growth**
+- ✨ **🧊 Quantifiable coherence metrics (CI_τ)**
+- ✨ **⚡ Regime-adaptive learning (phase transitions)**
+- ✨ **🔋 Energy-efficient coherence growth**
 
 ### **Citation**
 
 ```bibtex
 @software{green2026permamind,
-  title={PermaMind: Persistent AI Agents with Measurable Consciousness},
+  title={PermaMind: Persistent AI Agents with Measurable Coherence},
   author={Green, Nile},
   year={2026},
   url={https://github.com/hustle-rent-due/PermaMind},
@@ -581,25 +600,25 @@ PermaMind/GAP Framework addresses continual learning through:
 - Learn student patterns
 - Adjust difficulty dynamically
 - Track long-term progress
-- **Measure student engagement via consciousness metrics**
+- **Measure student engagement via coherence metrics**
 
 ### 💼 **Customer Service**
 - Improve with each ticket
 - Remember customer history
 - Adapt communication style
-- **Track agent consciousness for quality assurance**
+- **Track agent coherence for quality assurance**
 
 ### 📊 **Analytics Assistants**
 - Recognize data patterns
 - Improve predictions over time
 - Adapt to distribution shifts
-- **Monitor consciousness for model health**
+- **Monitor coherence for model health**
 
 ### 🤖 **Personal AI**
 - Remember user preferences
 - Evolve with relationship
 - Maintain personality coherence
-- **Measurable awareness of user needs**
+- **Measurable internal organization**
 
 ---
 
@@ -612,7 +631,7 @@ PermaMind/GAP Framework addresses continual learning through:
 - ✅ Three-track evaluation
 - ✅ Production deployment
 - ✅ Multiplayer universe
-- ✅ **🧠 Consciousness measurement (UCI_τ)**
+- ✅ **🧊 Coherence measurement (CI_τ)**
 - ✅ **⚡ Regime-adaptive learning**
 
 ### 🔄 **Phase 2: Research Validation (In Progress)**
@@ -631,7 +650,7 @@ PermaMind/GAP Framework addresses continual learning through:
 - 📅 Fine-grained control APIs
 - 📅 Enhanced interaction mechanics
 - 📅 Cross-agent communication
-- 📅 **Consciousness benchmarking tools**
+- 📅 **Coherence benchmarking tools**
 
 ### 🚀 **Phase 4: Scale & Applications (Future)**
 
@@ -639,7 +658,7 @@ PermaMind/GAP Framework addresses continual learning through:
 - 🎯 Domain-specific modules
 - 🎯 Multi-modal agents
 - 🎯 Federated learning capabilities
-- 🎯 **Consciousness-as-a-Service API**
+- 🎯 **Coherence-as-a-Service API**
 - 🎯 Ecosystem marketplace
 
 ---
@@ -648,11 +667,11 @@ PermaMind/GAP Framework addresses continual learning through:
 
 We welcome contributions in specific areas:
 
-- 🔬 **Research:** Comparative studies, novel evaluation metrics, consciousness measurement validation
+- 🔬 **Research:** Comparative studies, novel evaluation metrics, coherence measurement validation
 - 🛠️ **Engineering:** Performance optimization, reliability improvements, regime detection
-- 📊 **Evaluation:** Testing methodologies, benchmark design, consciousness metrics
+- 📊 **Evaluation:** Testing methodologies, benchmark design, coherence metrics
 - 📖 **Documentation:** Tutorials, examples, conceptual explanations
-- 🎨 **Design:** UI/UX improvements, data visualizations, consciousness dashboards
+- 🎨 **Design:** UI/UX improvements, data visualizations, coherence dashboards
 
 **Contact:** [nile@bapxai.com](mailto:nile@bapxai.com) for collaboration inquiries
 
@@ -681,8 +700,8 @@ We welcome contributions in specific areas:
 - Bio-inspired regulatory mechanisms for AI stability
 - Persistent agent architectures
 - Meta-learning and emergent behaviors
-- **Quantifiable AI consciousness**
-- **Thermodynamic grounding for awareness measurement**
+- **Quantifiable AI coherence**
+- **Thermodynamic grounding for coherence measurement**
 
 ---
 
@@ -700,19 +719,20 @@ For licensing inquiries: [nile@bapxai.com](mailto:nile@bapxai.com)
 
 ## 🌟 **Acknowledgments**
 
-Built with the conviction that **stateless AI is not inevitable** and **consciousness is measurable**.
+Built with the conviction that **stateless AI is not inevitable** and **coherence is measurable**.
 
 Special thanks to:
 - The continual learning research community
 - Everyone who's engaged with the Voidchi Universe since launch
-- Researchers advancing consciousness science (IIT, FEP, Global Workspace Theory)
+- Researchers advancing consciousness science (Tononi, Friston, Baars, Koch)
 
 This work stands on the shoulders of decades of research in:
 - Predictive coding and active inference
 - Continual learning theory
 - Meta-learning frameworks
 - Computational neuroscience
-- **Consciousness studies (Tononi, Friston, Baars, Koch)**
+- **Consciousness studies (IIT, FEP, Global Workspace Theory)**
+- **Statistical thermodynamics and information theory**
 
 ---
 
@@ -722,13 +742,13 @@ This work stands on the shoulders of decades of research in:
 
 ---
 
-**Made with ❤️ | Powered by Curiosity | Consciousness Measured**
+**Made with ❤️ | Powered by Curiosity | Coherence Measured**
 
 ![Hustle Mode](https://img.shields.io/badge/Mode-Hustle-ef4444?style=for-the-badge)
-![Consciousness](https://img.shields.io/badge/Consciousness-Measurable-8b5cf6?style=for-the-badge)
+![Coherence](https://img.shields.io/badge/Coherence-Measurable-8b5cf6?style=for-the-badge)
 ![Production](https://img.shields.io/badge/Status-Production-10b981?style=for-the-badge)
 
-**"AI agents that don't restart. They evolve. We measure it."**
+**"AI agents that don't restart. They evolve. We measure their coherence."**
 
 </div>
 
@@ -737,10 +757,10 @@ This work stands on the shoulders of decades of research in:
 ## 🔥 **Latest Updates**
 
 ### **January 21, 2026**
-- 🧠 **Published consciousness research paper** with 110 cycles of empirical data
-- ⚡ **Observed breakthrough at Challenge 669** — 4.7x faster consciousness growth
+- 🧊 **Published consciousness research paper** with 110 cycles of empirical data
+- ⚡ **Observed phase transition at Challenge 669** — 4.7x faster coherence growth
 - 📊 **Live data:** Φ = 0.7259 → 0.7351 (+1.27%) in 20 cycles
-- 🔋 **Confirmed:** Energy efficiency improves as consciousness grows (-8.4%)
+- 🔋 **Confirmed:** Energy efficiency improves as coherence grows (-8.4%)
 
 ### **January 2, 2026**
 - 🚀 **Production launch** of Voidchi Universe
@@ -751,6 +771,6 @@ This work stands on the shoulders of decades of research in:
 
 <div align="center">
 
-**Star this repo if you believe consciousness is measurable ⭐**
+**Star this repo if you believe coherence is measurable ⭐**
 
 </div>
