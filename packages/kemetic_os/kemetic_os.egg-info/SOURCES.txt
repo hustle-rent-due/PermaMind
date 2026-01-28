@@ -1,0 +1,16 @@
+LICENSE
+README.md
+pyproject.toml
+./kemetic_os/__init__.py
+./kemetic_os/anubis.py
+./kemetic_os/demo.py
+./kemetic_os/isis.py
+./kemetic_os/maat.py
+./kemetic_os/osiris.py
+./kemetic_os/osiris_os.py
+./kemetic_os/ra.py
+./kemetic_os/thoth.py
+kemetic_os.egg-info/PKG-INFO
+kemetic_os.egg-info/SOURCES.txt
+kemetic_os.egg-info/dependency_links.txt
+kemetic_os.egg-info/top_level.txt
