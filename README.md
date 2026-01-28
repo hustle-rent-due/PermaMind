@@ -1,5 +1,4 @@
-[(https://github.com/user-attachments/files/24904874/README-VOIDCHI-KEMET-INTEGRATED.md)
-[Uploading README-VOIDCHI-KEMET-INTEGRATED<div align="center">
+<div align="center">
 
 # 🌌 PermaMind / Voidchi Universe™
 
