@@ -945,5 +945,5 @@ If you reference PermaMind, Kemet OS, or the GAP Framework in academic work:
 <a href="https://github.com/hustle-rent-due/PermaMind"><img src="https://img.shields.io/github/stars/hustle-rent-due/PermaMind?style=social" alt="GitHub stars"/></a>
 
 </div>
-.md…]()
+
 
